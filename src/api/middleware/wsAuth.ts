@@ -2,6 +2,7 @@ import type { IncomingMessage } from 'http';
 import crypto from 'crypto';
 import { validateFluxerToken } from './auth';
 import config from '@/config';
+import { canAccessDashboard } from '@/utils/accessControl';
 
 function parseCookies(cookieHeader: string | undefined): Record<string, string> {
   const result: Record<string, string> = {};
@@ -34,6 +35,8 @@ export async function verifyWsToken(req: IncomingMessage, requireOwner = false):
 
   const userId = await validateFluxerToken(token);
   if (!userId) return null;
+
+  if (!(await canAccessDashboard(userId, token))) return null;
 
   if (requireOwner) {
     const isOwner = config.ownerId ? userId === config.ownerId : false;
