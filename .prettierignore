@@ -1,0 +1,12 @@
+build/
+coverage/
+node_modules/
+.pnpm-store/
+pnpm-lock.yaml
+dashboard/pnpm-lock.yaml
+docs/
+dashboard/node_modules/
+dashboard/dist/
+logs/
+*.min.js
+*.min.css

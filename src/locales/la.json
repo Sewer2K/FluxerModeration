@@ -1,0 +1,71 @@
+{
+  "verification": {
+    "panel": {
+      "title": "🔒 Vērificātiō Commūnitātis",
+      "footer": "Vērificātiō celeris et facilis est!"
+    },
+    "setupComplete": {
+      "title": "✅ Creātiō Vērificātiōnis Perficitur"
+    },
+    "captcha": {
+      "title": "🔒 Vērificātiō Necessē Est"
+    },
+    "errors": {
+      "generateCaptchaFailed": "Gignere captcham dēficiō: {error}"
+    },
+    "result": {
+      "passedTitle": "✅ Vērificātiō Perficitur!",
+      "incorrectTitle": "❌ Falsus"
+    },
+    "log": {
+      "startedTitle": "Vērificātiō Incipitur",
+      "passedTitle": "✅ Vērificātiō Ēvēnit Prosperē",
+      "failedTitle": "❌ Vērificātiō Dēfēcit"
+    },
+    "categorySetDone": "Genus vērificātiōnis accommodātus fuit `{categoryId}`.",
+    "help": {
+      "title": "Systēma Vērificātiōnis Manuālis"
+    }
+  },
+  "commands": {
+    "moderation": {
+      "appeal": {
+        "usage": "Usage: `{prefix}appeal list [userId]`, `{prefix}appeal view <userId>`, `{prefix}appeal approve|deny|dismiss|blacklist <userId> [note]`, `{prefix}appeal link <userId>`, or `{prefix}appeal config ...`",
+        "userUsage": "Usage: `{prefix}appeal view|approve|deny|dismiss|blacklist|link <userId>`",
+        "nonePending": "There are no pending ban appeals.",
+        "pendingTitle": "Pending ban appeals",
+        "notFound": "No appeal record was found for that user.",
+        "viewTitle": "Ban appeal for {userId}",
+        "linkUnavailable": "No appeal link is available for that user.",
+        "linkSent": "The appeal link was sent to your Fluxer DMs.",
+        "linkDmFailed": "I could not DM the appeal link. Check your DMs and try again.",
+        "notPending": "That appeal is not pending. Current state: {state}.",
+        "approveFailed": "Fluxer rejected the unban. The appeal was not approved.",
+        "approved": "Approved the appeal and unbanned {userId}.",
+        "decisionSaved": "Appeal state saved as **{state}**.",
+        "configStatus": "Appeals: **{enabled}**\nReview channel: **{channelId}**\nCooldown: **{cooldownDays} day(s)**\nTemp bans: **{tempBans}**\nDefault no-appeal: **{defaultNoAppeal}**\nUse `{prefix}appeal config enabled|tempbans|defaultnoappeal on|off`, `channel <channelId|none>`, or `cooldown <days>`. ",
+        "configUsage": "Usage: `{prefix}appeal config enabled|tempbans|defaultnoappeal on|off`, `channel <channelId|none>`, or `cooldown <0-365>`. ",
+        "configToggleUsage": "Use `on` or `off`.",
+        "configInvalidChannel": "Provide a valid Fluxer channel ID or `none`.",
+        "configInvalidCooldown": "Cooldown must be a whole number from 0 to 365 days.",
+        "configSaved": "Appeal settings saved."
+      }
+    },
+    "admin": {
+      "automod": {
+        "levelDescriptions": {
+          "off": "Omnēs modulī automoderātōrum sunt dēbilitātī"
+        }
+      }
+    }
+  },
+  "auditCatalog": {
+    "commands": {
+      "admin": {
+        "goodbye": {
+          "l242_embedReply_title": "Systēma Nūntiī Discessūrī"
+        }
+      }
+    }
+  }
+}

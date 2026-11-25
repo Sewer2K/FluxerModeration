@@ -1,0 +1,31 @@
+packages:
+  - '.'
+  - 'dashboard'
+  - 'docs'
+
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true
+  core-js: true
+  '@parcel/watcher': true
+
+overrides:
+  undici: 7.29.1
+  source-map-js: 1.2.2
+
+minimumReleaseAgeExclude:
+  - '@sentry/core@10.60.0'
+  - '@sentry/node-core@10.60.0'
+  - '@sentry/node@10.60.0'
+  - '@sentry/opentelemetry@10.60.0'
+  - '@sentry/server-utils@10.60.0'
+  - '@fluxerjs/builders@2.2.0'
+  - '@fluxerjs/collection@2.2.0'
+  - '@fluxerjs/core@2.2.0 || 3.3.0'
+  - '@fluxerjs/rest@2.2.0'
+  - '@fluxerjs/types@2.2.0 || 3.3.0'
+  - '@fluxerjs/util@2.2.0'
+  - '@fluxerjs/ws@2.2.0'
+  - '@posthog/core@1.46.7'
+  - '@posthog/types@1.401.0'
+  - 'posthog-js@1.411.0'

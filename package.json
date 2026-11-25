@@ -1,0 +1,137 @@
+{
+  "name": "claudecitymod",
+  "version": "3.0.0",
+  "description": "ClaudeCityMod - verification and auto-moderation bot for Fluxer with an optional dashboard",
+  "main": "build/index.js",
+  "scripts": {
+    "prebuild": "node scripts/preflight-slot.js",
+    "build": "rimraf build && tsc && tsc-alias && node scripts/copy-build-assets.mjs",
+    "prebuild:clean": "node scripts/preflight-slot.js",
+    "build:clean": "rimraf build/ && pnpm run build",
+    "prestart": "node scripts/preflight-slot.js",
+    "start": "node build/index.js",
+    "predev": "node scripts/preflight-slot.js",
+    "dev": "tsx watch src/index.ts",
+    "pretest": "node scripts/preflight-slot.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "prei18n:check": "node scripts/preflight-slot.js",
+    "i18n:check": "tsx scripts/validate-locales.ts",
+    "i18n:scrub": "tsx scripts/locale-scrubbing.ts",
+    "i18n:dupes": "tsx scripts/find-duplicated-locale-strings.ts",
+    "crowdin:consolidate": "tsx scripts/consolidate-crowdin-locales.ts",
+    "pm2:start": "pm2 start ecosystem.config.js --only claudecitymod",
+    "pm2:stop": "pm2 stop claudecitymod",
+    "pm2:restart": "pm2 restart claudecitymod",
+    "pm2:logs": "pm2 logs claudecitymod",
+    "pm2:monit": "pm2 monit",
+    "pm2:status": "pm2 status",
+    "prelint": "node scripts/preflight-slot.js",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "preformat": "node scripts/preflight-slot.js",
+    "format": "prettier --write .",
+    "preformat:check": "node scripts/preflight-slot.js",
+    "format:check": "prettier --check .",
+    "docs:generate": "node docs/scripts/generate-commands.mjs",
+    "docs:dev": "pnpm --filter claudecitymod-docs run docs:dev",
+    "docs:build": "pnpm run docs:generate && pnpm --filter claudecitymod-docs run docs:build",
+    "docs:preview": "pnpm --filter claudecitymod-docs run docs:preview"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/tests"
+    ],
+    "testMatch": [
+      "<rootDir>/tests/**/*.test.ts"
+    ],
+    "transform": {
+      "^.+\\.ts$": [
+        "ts-jest",
+        {
+          "tsconfig": "tests/tsconfig.json"
+        }
+      ]
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!string-strip-html)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "@/(.*)": "<rootDir>/src/$1"
+    },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/moderation-bot/",
+      "<rootDir>/documentation/",
+      "<rootDir>/docs/",
+      "<rootDir>/tscord/"
+    ],
+    "forceExit": true,
+    "testTimeout": 15000
+  },
+  "keywords": [
+    "fluxer",
+    "moderation",
+    "bot",
+    "chatbot"
+  ],
+  "author": "",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "@dr.pogodin/csurf": "^1.18.2",
+    "@fluxerjs/builders": "3.0.0",
+    "@fluxerjs/collection": "3.0.0",
+    "@fluxerjs/core": "3.3.0",
+    "@fluxerjs/types": "3.3.0",
+    "@fluxerjs/ws": "3.1.0",
+    "@napi-rs/canvas": "^1.0.11",
+    "@sentry/node": "^10.63.0",
+    "@types/compression": "^1.8.1",
+    "compression": "^1.8.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^18.0.0",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "fast-xml-parser": "^5.11.2",
+    "helmet": "^8.3.0",
+    "html-to-text": "^10.0.1",
+    "mongoose": "^9.11.2",
+    "node-cron": "^4.6.0",
+    "pidusage": "^4.1.0",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.6",
+    "@types/html-to-text": "^9.0.4",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.9.9",
+    "@types/node-cron": "^3.0.11",
+    "@types/pidusage": "^2.0.5",
+    "@types/supertest": "^7.2.0",
+    "@types/ws": "^8.18.1",
+    "@typescript-eslint/eslint-plugin": "^8.71.2",
+    "@typescript-eslint/parser": "^8.71.2",
+    "eslint": "^10.13.0",
+    "jest": "^30.5.2",
+    "prettier": "^3.9.10",
+    "rimraf": "^6.1.3",
+    "supertest": "^7.3.1",
+    "ts-jest": "^29.4.15",
+    "tsc-alias": "^1.9.8",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "pnpm@12.14.0"
+}

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">ClaudeCityMod</title>
+  <desc id="desc">A civic shield and city skyline mark for the ClaudeCityMod verification and moderation bot.</desc>
+  <defs>
+    <linearGradient id="bg" x1="96" y1="64" x2="928" y2="960" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1b2433"/>
+      <stop offset="0.56" stop-color="#111722"/>
+      <stop offset="1" stop-color="#0b0f16"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="512" y1="152" x2="512" y2="844" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff8e9"/>
+      <stop offset="1" stop-color="#e9dfca"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="320" y1="250" x2="744" y2="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2ca73"/>
+      <stop offset="1" stop-color="#c8892e"/>
+    </linearGradient>
+    <linearGradient id="mint" x1="390" y1="500" x2="672" y2="665" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8ee2bc"/>
+      <stop offset="1" stop-color="#47b58c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(512 418) rotate(90) scale(500)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8b45a" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#e8b45a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="150" y="110" width="724" height="786" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#000" flood-opacity=".38"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="220" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="220" fill="url(#glow)"/>
+  <rect x="26" y="26" width="972" height="972" rx="198" fill="none" stroke="#f7f3ea" stroke-opacity=".07" stroke-width="3"/>
+
+  <g opacity=".16" stroke="#f7f3ea" stroke-width="2">
+    <path d="M96 256h832M96 512h832M96 768h832"/>
+    <path d="M256 96v832M512 96v832M768 96v832"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <path d="M512 146 804 260v238c0 147-113 260-292 346C333 758 220 645 220 498V260l292-114Z" fill="url(#shield)"/>
+    <path d="M512 184 770 285v213c0 126-94 226-258 307-164-81-258-181-258-307V285l258-101Z" fill="#121925"/>
+  </g>
+
+  <path d="M512 218.5 738 307v191c0 107-79 195-226 272-147-77-226-165-226-272V307l226-88.5Z" fill="none" stroke="url(#brass)" stroke-width="16" stroke-linejoin="round"/>
+
+  <path d="M382 560c39 37 75 72 105 110 52-91 122-168 197-237" fill="none" stroke="url(#mint)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M627 433c21-19 43-38 67-56" fill="none" stroke="#9be9c6" stroke-opacity=".52" stroke-width="9" stroke-linecap="round"/>
+
+  <g fill="url(#brass)">
+    <path d="M328 642h62v79h-62z"/>
+    <path d="M405 590h74v131h-74z"/>
+    <path d="M494 552h58v169h-58z"/>
+    <path d="M567 604h64v117h-64z"/>
+    <path d="M646 568h50v153h-50z"/>
+  </g>
+  <g fill="#121925">
+    <path d="M346 658h9v10h-9zM365 658h9v10h-9zM346 682h9v10h-9zM365 682h9v10h-9z"/>
+    <path d="M422 608h12v13h-12zM446 608h12v13h-12zM422 636h12v13h-12zM446 636h12v13h-12zM422 664h12v13h-12zM446 664h12v13h-12z"/>
+    <path d="M510 571h10v12h-10zM530 571h10v12h-10zM510 596h10v12h-10zM530 596h10v12h-10zM510 621h10v12h-10zM530 621h10v12h-10z"/>
+    <path d="M584 621h10v12h-10zM606 621h10v12h-10zM584 645h10v12h-10zM606 645h10v12h-10z"/>
+    <path d="M660 585h8v10h-8zM675 585h8v10h-8zM660 605h8v10h-8zM675 605h8v10h-8zM660 625h8v10h-8zM675 625h8v10h-8z"/>
+  </g>
+
+  <circle cx="181" cy="198" r="13" fill="url(#brass)"/>
+  <circle cx="843" cy="826" r="8" fill="#8ee2bc" opacity=".7"/>
+</svg>

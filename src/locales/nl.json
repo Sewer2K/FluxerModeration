@@ -1,0 +1,1822 @@
+{
+  "terminology": {
+    "fluxer": {
+      "channel": "Kanaal",
+      "user": "Gebruiker"
+    }
+  },
+  "verification": {
+    "panel": {
+      "title": "🔒 Server Verificatie",
+      "description": "**Welkom!** Deze server vereist handmatige verificatie om bot misbruik te bestrijden.\n\nReageer met ✅ om het verificatieprocess te beginnen.\n\nJe zult in een privékanaal worden geplaatst met een Captcha - typ simpelweg de 6 letters in om jezelf te verifiëren.",
+      "footer": "Verificatie was snel een eenvoudig!"
+    },
+    "setupComplete": {
+      "title": "✅ Verificatie Installatie is Voltooid",
+      "description": "**Categorie:** Verificatie\n**Paneel Kanaal:** <#{panelChannelId}>\n**Geverifieërde Rol:** <@&{verifiedRoleId}>\n\nGebruikers kunnen nu reageren met ✅ in <#{panelChannelId}> om de verificatie te beginnen\n\n> **Belangrijk:** Zorg ervoor dat voor andere kanalen `@everyone` het `Kanaal bekijken` recht afgewezen en de **Verifieërd** rol toegelaten wordt. Dit zorgt ervoor dat niet geverifieërde gebruikers alleen het verificatiekanaal kunnen zien."
+    },
+    "captcha": {
+      "title": "🔒 Verificatie Vereist",
+      "description": "Welkom, <@{userId}>!\n\nTyp A.U.B. de **6 letters** in de afbeelding hierboven om jezelf te verifieëren.\n\nJe hebt **{maxAttempts}** poging(en). De code is **niet** hoofdlettergevoelig.\nDit kanaal verloopt over **60 seconden**."
+    },
+    "testChannelCreated": "Testverificatiekanaal aangemaakt: <#{channelId}>",
+    "errors": {
+      "missingPanelChannel": "Geef een kanaal op of voer eerst `{prefix}verify setup` uit.",
+      "usageRole": "Gebruik: `{prefix}verify rol <@rol>`",
+      "usageCategory": "Gebruik: `{prefix}verify categorie <categorieId>`",
+      "usageLog": "Gebruik: `{prefix}verify log <#kanaal>` of `{prefix}verify log clear`",
+      "usageTestFirst": "Voer eerst `{prefix}verify setup` uit om de verificatiecategorie aan te maken.",
+      "createTestVerificationChannelFailed": "Het is niet gelukt om het testverificatiekanaal aan te maken: {error}",
+      "createVerifiedRoleFailed": "Het is niet gelukt om de rol ‘Verifieërd’ aan te maken: {error}",
+      "createCategoryFailed": "Aanmaken van verificatiecategorie mislukt: {error}",
+      "createPanelChannelFailed": "Verificatiekanaal aanmaken mislukt: {error}",
+      "postPanelFailed": "Verificatiepaneel plaatsen mislukt: {error}",
+      "postPanelGenericFailed": "Paneel plaatsen mislukt: {error}",
+      "generateCaptchaFailed": "Genereren van captcha mislukt: {error}",
+      "updateFailed": "Er is een fout opgetreden bij het bijwerken van de verificatie-instellingen.",
+      "fetchFailed": "Er is een fout opgetreden bij het ophalen van de verificatie-instellingen.",
+      "invalidCategory": "Geef een geldig categorie-ID op."
+    },
+    "status": {
+      "enabledYes": "Ja",
+      "enabledNo": "Nee",
+      "notSet": "Niet ingesteld",
+      "maxAttemptsLabel": "Max. aantal pogingen",
+      "title": "Verificatie Instellingen"
+    },
+    "resetDone": "Verificatie-instellingen zijn gereset. Kanalen en rollen die tijdens de setup zijn aangemaakt, zijn **niet** verwijderd - verwijder deze indien nodig handmatig.",
+    "result": {
+      "passedTitle": "✅ Verificatie voltooid!",
+      "passedDescription": "Je bent geverifieerd. Dit kanaal wordt binnenkort verwijderd.",
+      "failedTitle": "❌ Verificatie mislukt",
+      "failedDescription": "Je hebt al je pogingen gebruikt. Dit kanaal wordt verwijderd. Probeer het opnieuw door op het verificatiepaneel te reageren.",
+      "incorrectTitle": "❌ Onjuist",
+      "incorrectDescription": "Dat was niet juist. Je hebt nog **{remaining}** poging(en) over."
+    },
+    "log": {
+      "startedTitle": "Verificatie gestart",
+      "startedDescription": "<@{userId}> is een verificatiepoging gestart.",
+      "passedTitle": "✅ Verificatie geslaagd",
+      "passedDescription": "<@{userId}> is geverifieerd.",
+      "failedTitle": "❌ Verificatie mislukt",
+      "failedDescription": "<@{userId}> is niet geverifieerd (alle pogingen gebruikt).",
+      "cleared": "Verificatielogkanaal gewist.",
+      "setDone": "Verificatielogkanaal ingesteld op <#{channelId}>."
+    },
+    "panelPosted": "Verificatiepaneel geplaatst in <#{channelId}>.",
+    "roleSetDone": "Geverifieerde rol ingesteld op <@&{roleId}>.",
+    "categorySetDone": "Verificatiecategorie ingesteld op `{categoryId}`.",
+    "help": {
+      "title": "Handmatig verificatiesysteem",
+      "body": "`{prefix}verify setup` - maak automatisch categorie, kanaal, rol en paneel aan\n`{prefix}verify panel [#kanaal]` - herplaats het verificatiepaneel\n`{prefix}verify role <@rol` - stel de geverifieerde rol in\n`{prefix}verify category <id>` - stel de verificatiecategorie in\n`{prefix}verify log <#kanaal>` - stel een logkanaal in\n`{prefix}verify status` - toon huidige configuratie\n`{prefix}verify reset` - schakel uit en wis instellingen\n`{prefix}verify test` - open een testverificatiekanaal voor jezelf"
+    }
+  },
+  "language": {
+    "current": "Huidige taal: `{language}`",
+    "set": "Taal ingesteld op `{language}`.",
+    "invalid": "Onbekende taal `{language}`. Beschikbaar: {available}",
+    "available": "Beschikbare talen: {available}",
+    "usage": "Gebruik: `{prefix}language set <code>` of `{prefix}language list`"
+  },
+  "commands": {
+    "ping": {
+      "pinging": "Bezig met pingen...",
+      "title": "Pong!",
+      "gateway": "Gateway",
+      "footer": "Fluxer API - api.fluxer.app",
+      "restApi": "REST-API",
+      "roundTrip": "Retourtijd bericht",
+      "warmingUp": "Nog aan het herverbinden - probeer over een paar minuten opnieuw voor accurate cijfers"
+    },
+    "invite": {
+      "title": "ClaudeCityMod uitnodigen",
+      "description": "Voeg ClaudeCityMod toe aan je server en krijg krachtige moderatie, welkomstberichten, logging en meer!\n\n**[Klik hier om ClaudeCityMod uit te nodigen]({inviteUrl})**",
+      "footer": "ClaudeCityMod - Moderatie eenvoudig gemaakt",
+      "fallback": "**Nodig ClaudeCityMod uit voor je server:**\n{inviteUrl}"
+    },
+    "myprefix": {
+      "current": "Je persoonlijke prefix is `{prefixValue}`. Gebruik `{prefix}myprefix clear` om deze te verwijderen.",
+      "notSet": "Je hebt geen persoonlijke prefix ingesteld. Gebruik `{prefix}myprefix <prefix>` om er een in te stellen.",
+      "fetchFailed": "Kon je prefixinstelling niet ophalen.",
+      "cleared": "Je persoonlijke prefix is verwijderd. Je gebruikt nu de standaardprefix van de server.",
+      "tooLong": "Prefix is te lang (max {max} tekens).",
+      "noSpaces": "Prefix mag geen spaties bevatten.",
+      "saved": "Je persoonlijke prefix is ingesteld op `{newPrefix}`. Je kunt nu overal `{newPrefix}help` gebruiken.",
+      "saveFailed": "Kon je prefix niet opslaan.",
+      "clearFailed": "Kon je prefix niet verwijderen."
+    },
+    "mydata": {
+      "info": "**Gegevens die ClaudeCityMod over jou opslaat:**\n- Persoonlijke prefix (indien ingesteld via `!myprefix`)\n- Waarschuwingen die je hebt ontvangen in servers\n- Moderatieacties waarbij je betrokken bent (als doelwit of moderator)\n- Ticketberichten die je hebt verzonden in ticketkanalen\n- Statistieken over commandogebruik\n- Globale ban-vermelding (indien van toepassing)\n\n`{prefix}mydata export` - ontvang een bestand met al je gegevens\n`{prefix}mydata delete` - verwijder al je gegevens permanent",
+      "collecting": "Ik verzamel je gegevens... Ik stuur je het exportbestand via een DM.",
+      "dmContent": "Hier zijn alle gegevens die ClaudeCityMod over je heeft opgeslagen. Dit omvat waarschuwingen, moderatielogs, ticketdeelname en instellingen.",
+      "dmSent": "Verzonden! Controleer je DM's.",
+      "dmOpenFailed": "Ik kon geen DM met je openen. Zorg ervoor dat je DM's openstaan.",
+      "dmSendFailed": "Ik kon je geen DM sturen. Zorg ervoor dat je DM's openstaan en probeer het opnieuw.",
+      "exportFailed": "Er is iets misgegaan bij het verzamelen van je gegevens. Probeer het later opnieuw.",
+      "deleteConfirm": "**Weet je het zeker?** Dit zal permanent verwijderen:\n- Je persoonlijke prefix\n- Al je waarschuwingen op elke server\n- Je identiteit in moderatielogs (geanonimiseerd naar \"[deleted]\")\n- Je identiteit in tickettranscripten (geanonimiseerd naar \"Deleted User\")\n- Je commandogebruiksstatistieken\n\n**Dit kan niet ongedaan worden gemaakt.**\nVoer `{prefix}mydata delete` binnen 60 seconden opnieuw uit om te bevestigen.",
+      "deleting": "Je gegevens worden verwijderd...",
+      "deleteDoneHeader": "**Gegevensverwijdering voltooid.**",
+      "deleteNoData": "Er zijn geen gegevens gevonden om te verwijderen.",
+      "deleteFailed": "Er is iets misgegaan bij het verwijderen van je gegevens. Probeer het later opnieuw.",
+      "unknown": "Onbekende optie. Gebruik `{prefix}mydata info`, `{prefix}mydata export`, of `{prefix}mydata delete`."
+    },
+    "report": {
+      "missingMessage": "Voeg een bericht toe bij je melding. Voorbeeld: `{prefix}report iemand plaatst spam in #general`",
+      "tooLong": "Je melding is te lang (max 1000 tekens). Vat samen en probeer het opnieuw.",
+      "submitFailedDm": "Je melding kon momenteel niet worden ingediend vanwege een serverfout. Probeer het straks opnieuw.",
+      "notConfiguredDm": "Staff-meldingen zijn nog niet geconfigureerd op deze server. Neem alstublieft rechtstreeks contact op met een beheerder.",
+      "fieldReporter": "Melder",
+      "fieldUserId": "Gebruikers-ID",
+      "embedTitle": "Nieuw personeelsrapport",
+      "deliveredDm": "Je melding in **{guildName}** is doorgestuurd naar het staffteam. Iemand zal indien nodig direct contact met je opnemen. Bedankt dat je het hebt gemeld.",
+      "permissionsErrorDm": "Je melding in **{guildName}** kon niet worden afgeleverd vanwege een rechtenfout. Neem rechtstreeks contact op met een staflid.",
+      "channelUnavailableDm": "Je melding in **{guildName}** kon niet worden afgeleverd omdat het staffkanaal niet beschikbaar is. Neem rechtstreeks contact op met een staflid."
+    },
+    "rank": {
+      "ownerOnly": "Alleen de servereigenaar kan dit commando op deze server gebruiken.",
+      "noXp": "Nog geen xp geregistreerd voor die gebruiker.",
+      "title": "Rang",
+      "level": "Level",
+      "rank": "Rang",
+      "progress": "Voortgang",
+      "totalXp": "Totale XP",
+      "messages": "Berichten",
+      "levelUp": "{user} is naar **level {level}** gestegen!"
+    },
+    "leaderboard": {
+      "empty": "Er is nog geen xp geregistreerd op deze server.",
+      "invalidPeriod": "Onbekende periode. Gebruik `weekly`, `monthly`, of laat weg voor all-time. Voorbeeld: `{prefix}lb weekly`",
+      "title": "XP Ranglijst",
+      "titleWeekly": "Wekelijks XP-klassement",
+      "entry": "level {level} ({xp} xp)",
+      "entryWeekly": "level {level} ({xp} xp deze week)",
+      "entryMonthly": "level {level} ({xp} xp deze maand)",
+      "footerHint": "Gebruik ◄► om te bladeren",
+      "titleMonthly": "Maandelijks XP-klassement"
+    },
+    "givexp": {
+      "usage": "Gebruik: `{prefix}givexp <@user> <hoeveelheid>`",
+      "failed": "Kon geen XP toekennen.",
+      "success": "**{amount}** XP toegevoegd aan <@{userId}> - nu level **{level}** met **{xp}** XP in totaal."
+    },
+    "removexp": {
+      "usage": "Gebruik: `{prefix}removexp <@user> <hoeveelheid>`",
+      "success": "**{amount}** XP verwijderd van <@{userId}> - nu level **{level}** met **{xp}** totale XP."
+    },
+    "resetxp": {
+      "ownerOnly": "Alleen de servereigenaar kan de XP op deze server resetten.",
+      "usage": "Gebruik: `{prefix}resetxp <@user>`",
+      "success": "XP gereset voor <@{userId}>."
+    },
+    "uptime": {
+      "labelUptime": "Uptime",
+      "labelStarted": "Gestart",
+      "unitDaySingular": "dag",
+      "unitDayPlural": "dagen",
+      "unitHourSingular": "uur",
+      "unitHourPlural": "uren",
+      "unitMinuteSingular": "minuut",
+      "unitMinutePlural": "minuten",
+      "unitSecondSingular": "seconde",
+      "unitSecondPlural": "seconden",
+      "response": "**{labelUptime}:** {uptimeString}\n**{labelStarted}:** {startString}",
+      "listSeparator": ", "
+    },
+    "inrole": {
+      "usage": "Gebruik: `{prefix}inrole <@rol [pagina]`",
+      "noneWithRole": "Geen leden hebben momenteel de rol **{roleName}**.",
+      "invalidPage": "Pagina moet een getal zijn dat begint bij 1.",
+      "pageTooHigh": "Er zijn slechts {totalPages} pagina('s) beschikbaar voor deze rol.",
+      "embedTitle": "Leden met {roleName}",
+      "footerTotal": "{memberCount} lid/leden in totaal",
+      "footerPageHint": "pagina {page}/{totalPages} - gebruik {prefix}inrole <rol <page> om andere pagina's te bekijken",
+      "genericError": "Er is een fout opgetreden bij het ophalen van leden."
+    },
+    "roleinfo": {
+      "usage": "Gebruik: `{prefix}roleinfo <@rol`",
+      "defaultColor": "Standaard (geen kleur)",
+      "title": "Rol: {roleName}",
+      "fieldId": "ID",
+      "fieldColor": "Kleur",
+      "fieldPosition": "Positie",
+      "fieldHoisted": "Apart weergegeven",
+      "fieldMentionable": "Vermeldbaar",
+      "fieldCreated": "Aangemaakt",
+      "unknown": "Onbekend",
+      "yes": "Ja",
+      "no": "Nee",
+      "genericError": "Er is een fout opgetreden bij het ophalen van rolinformatie."
+    },
+    "serverinfo": {
+      "title": "Serverinformatie",
+      "fieldName": "Naam",
+      "fieldId": "ID",
+      "fieldOwner": "Eigenaar",
+      "fieldMembers": "Leden",
+      "fieldTextChannels": "Tekstkanalen",
+      "fieldVoiceChannels": "Spraakkanalen",
+      "fieldCategories": "Categorieën",
+      "fieldRoles": "Rollen",
+      "fieldCreated": "Aangemaakt",
+      "fieldFeatures": "Functies",
+      "none": "Geen",
+      "genericError": "Er is een fout opgetreden bij het ophalen van serverinformatie."
+    },
+    "userinfo": {
+      "userNotFound": "Kon die gebruiker niet vinden.",
+      "title": "Gebruikersinformatie",
+      "fieldUsername": "Gebruikersnaam",
+      "fieldId": "ID",
+      "fieldBot": "Bot",
+      "fieldAccountCreated": "Account aangemaakt",
+      "fieldJoinedServer": "Lid geworden van server",
+      "fieldRoles": "Rollen ({totalRoles})",
+      "fieldTimeout": "Time-out",
+      "fieldNickname": "Bijnaam",
+      "yes": "Ja",
+      "no": "Nee",
+      "unknown": "Onbekend",
+      "timeoutUntil": "Tot {timeoutEnd}",
+      "genericError": "Er is een fout opgetreden bij het ophalen van gebruikersinformatie.",
+      "rolesOverflowSuffix": "..."
+    },
+    "reload": {
+      "ownerOnly": "Dit commando is voorbehouden aan de bot-eigenaar.",
+      "usage": "Gebruik: `{prefix}reload <command>`",
+      "commandNotFound": "Commando `{commandName}` niet gevonden.",
+      "success": "Commando `{commandName}` succesvol herladen.",
+      "error": "Fout bij het herladen van het commando: `{error}`"
+    },
+    "moderation": {
+      "warn": {
+        "usage": "Gebruik: `{prefix}warn <user> <reason>`",
+        "missingReason": "Geef een reden voor de waarschuwing op.",
+        "success": "Succesvol een waarschuwing gegeven aan **{username}** (<@{userId}>).\n**Reden:** {reason}\n**Totaal aantal waarschuwingen:** {warningCount}",
+        "autoMuteApplied": "⚠️ Automatische mute toegepast op <@{targetUserId}> na het bereiken van **{warningCount}** waarschuwingen (drempel: **{threshold}**).",
+        "autoMuteReason": "Auto-mute drempel bereikt ({warningCount}/{threshold})",
+        "dmTitle": "Waarschuwing in {guildName}",
+        "dmDescription": "Je hebt een waarschuwing ontvangen in **{guildName}**.",
+        "dmFieldReason": "Reden",
+        "dmFieldTotalWarnings": "Totaal aantal waarschuwingen",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het proberen die gebruiker te waarschuwen."
+        }
+      },
+      "clear": {
+        "usage": "Gebruik: `{prefix}clear <amount>` (1-1000)",
+        "invalidNumber": "Geef een geldig getal op.",
+        "amountRange": "Aantal moet tussen 1 en 1000 liggen.",
+        "noMessages": "Geen berichten gevonden om te verwijderen.",
+        "successDeleted": "**{userCount}** bericht(en) succesvol verwijderd.",
+        "errors": {
+          "cannotDeleteOlderThan14Days": "Kan geen berichten verwijderen die ouder zijn dan 14 dagen.",
+          "generic": "Er is een fout opgetreden bij het verwijderen van berichten."
+        }
+      },
+      "ban": {
+        "usage": "Gebruik: `{prefix}ban <user> [reden]`",
+        "cannotBanRoleHierarchy": "Ik kan deze gebruiker niet bannen omdat hun hoogste rol gelijk is aan of hoger staat dan die van mij. Vraag een serverbeheerder om mijn rol hoger in de rollenlijst te zetten.",
+        "success": "**{username}** (<@{userId}>) succesvol verbannen.\n**Reden:** {reason}",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het bannen van deze gebruiker."
+        }
+      },
+      "timeout": {
+        "usage": "Gebruik: `{prefix}timeout <gebruiker> <duur> [reden]`\nDuurformaat: 10s, 5m, 1h, 1d (max 28 dagen)",
+        "missingDuration": "Geef een duur op. Formaat: 10s, 5m, 1u, 1d (max 28 dagen)",
+        "invalidDurationFormat": "Ongeldige duurnotatie. Gebruik: 10s, 5m, 1h, 1d (max 28 dagen)",
+        "durationTooLong": "Time-out duur mag niet langer zijn dan 28 dagen.",
+        "cannotTimeoutRoleHierarchy": "Ik kan deze gebruiker geen timeout geven omdat hun hoogste rol gelijk is aan of hoger staat dan die van mij. Vraag een serverbeheerder om mijn rol hoger in de rollenlijst te zetten.",
+        "alreadyTimedOutRemaining": "Die gebruiker heeft al een timeout. Resterend: {remaining}",
+        "successTimedOut": "**{username}** (<@{userId}>) heeft succesvol een timeout gekregen voor **{duration}**.\n**Reden:** {reason}",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het proberen om dat lid een timeout te geven."
+        }
+      },
+      "kick": {
+        "usage": "Gebruik: `{prefix}kick <gebruiker> [reden]`",
+        "cannotKickRoleHierarchy": "Ik kan deze gebruiker niet kicken omdat hun hoogste rol gelijk is aan of hoger staat dan die van mij. Vraag een serverbeheerder om mijn rol hoger in de rollenlijst te zetten.",
+        "success": "**{username}** (<@{userId}>) is succesvol gekickt.\n**Reden:** {reason}",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het kicken van dat lid."
+        }
+      },
+      "mute": {
+        "usage": "Gebruik: `{prefix}mute <user> [reden]`",
+        "cannotMuteRoleHierarchy": "Ik kan deze gebruiker niet muten omdat hun hoogste rol gelijk aan of hoger is dan die van mij. Vraag een serverbeheerder om mijn rol hoger in de rollenlijst te zetten.",
+        "alreadyMuted": "Die gebruiker is al gemute.",
+        "muteRoleOnlyCannotApply": "Mute-methode is ingesteld op **alleen mute-rol**, maar ik kan de mute-rol niet toepassen (rol ontbreekt, permissie ontbreekt, of rolhiërarchie-probleem).",
+        "muteRoleNotConfigured": "De mute-rolmethode is ingeschakeld, maar er is geen mute-rol geconfigureerd.",
+        "successMutedRole": "**{username}** (<@{userId}>) is succesvol gemute.\n**Reden:** {reason}",
+        "successMutedDuration": "**{username}** (<@{userId}>) is voor **{duration}** gemute.\n**Reden:** {reason}",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij een poging om dat lid te muten."
+        }
+      },
+      "unmute": {
+        "usage": "Gebruik: `{prefix}unmute <user>`",
+        "notCurrentlyMuted": "Die gebruiker is momenteel niet gedempt.",
+        "success": "**{username}** (<@{userId}>) is succesvol gedemute.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het proberen dit lid te unmuten."
+        }
+      },
+      "unban": {
+        "usage": "Gebruik: `{prefix}unban <gebruikersId> [reden]`",
+        "notBanned": "Deze gebruiker is niet verbannen van deze server.",
+        "success": "**{username}** (<@{userId}>) is succesvol geünband.\n**Reden:** {reason}",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het unbannen van deze gebruiker."
+        }
+      },
+      "appeal": {
+        "usage": "Usage: `{prefix}appeal list [userId]`, `{prefix}appeal view <userId>`, `{prefix}appeal approve|deny|dismiss|blacklist <userId> [note]`, `{prefix}appeal link <userId>`, or `{prefix}appeal config ...`",
+        "userUsage": "Usage: `{prefix}appeal view|approve|deny|dismiss|blacklist|link <userId>`",
+        "nonePending": "There are no pending ban appeals.",
+        "pendingTitle": "Pending ban appeals",
+        "notFound": "No appeal record was found for that user.",
+        "viewTitle": "Ban appeal for {userId}",
+        "linkUnavailable": "No appeal link is available for that user.",
+        "linkSent": "The appeal link was sent to your Fluxer DMs.",
+        "linkDmFailed": "I could not DM the appeal link. Check your DMs and try again.",
+        "notPending": "That appeal is not pending. Current state: {state}.",
+        "approveFailed": "Fluxer rejected the unban. The appeal was not approved.",
+        "approved": "Approved the appeal and unbanned {userId}.",
+        "decisionSaved": "Appeal state saved as **{state}**.",
+        "configStatus": "Appeals: **{enabled}**\nReview channel: **{channelId}**\nCooldown: **{cooldownDays} day(s)**\nTemp bans: **{tempBans}**\nDefault no-appeal: **{defaultNoAppeal}**\nUse `{prefix}appeal config enabled|tempbans|defaultnoappeal on|off`, `channel <channelId|none>`, or `cooldown <days>`. ",
+        "configUsage": "Usage: `{prefix}appeal config enabled|tempbans|defaultnoappeal on|off`, `channel <channelId|none>`, or `cooldown <0-365>`. ",
+        "configToggleUsage": "Use `on` or `off`.",
+        "configInvalidChannel": "Provide a valid Fluxer channel ID or `none`.",
+        "configInvalidCooldown": "Cooldown must be a whole number from 0 to 365 days.",
+        "configSaved": "Appeal settings saved."
+      },
+      "warnings": {
+        "title": "Waarschuwingen voor {username}",
+        "noWarnings": "Deze gebruiker heeft geen waarschuwingen.",
+        "showing": "{shownCount} van {totalWarnings} waarschuwing(en) weergegeven",
+        "fieldRecentWarnings": "Recente waarschuwingen",
+        "none": "Geen",
+        "moderatorLabel": "Moderator",
+        "dateLabel": "Datum",
+        "unknown": "Onbekend",
+        "unknownDate": "Onbekende datum",
+        "footerTotalWarnings": "Totaal aantal waarschuwingen: {totalWarnings}",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het ophalen van waarschuwingen."
+        }
+      },
+      "clearwarns": {
+        "usage": "Gebruik: `{prefix}clearwarns <user>`",
+        "noWarningsToClear": "Die gebruiker heeft geen waarschuwingen om te verwijderen.",
+        "success": "**{currentCount}** waarschuwing(en) voor **{username}** (<@{userId}>) succesvol verwijderd.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het wissen van waarschuwingen."
+        }
+      },
+      "slowmode": {
+        "permissionRequired": "Je hebt de **Manage Channels**-permissie (of een toegestane rol) nodig om dit commando te gebruiken.",
+        "disabledInChannel": "Slowmode is momenteel **uitgeschakeld** in dit kanaal.",
+        "currentSlowmode": "Huidige slowmode is **{duration}**.",
+        "disabled": "Slowmode is **uitgeschakeld**.",
+        "failedDisable": "Slowmode uitschakelen mislukt.",
+        "invalidDurationFormat": "Ongeldig duurformaat. Gebruik: 10s, 5m, 1h (max 6 uur) of \"off\" om uit te schakelen.",
+        "tooShort": "Slowmode moet minimaal 1 seconde zijn.",
+        "tooLong": "Slowmode kan niet langer duren dan 6 uur.",
+        "setSuccess": "Slowmode ingesteld op **{duration}**.",
+        "failedSet": "Slowmode instellen mislukt."
+      },
+      "massban": {
+        "usage": "**Gebruik:** `{prefix}massban <startBerichtId> <eindBerichtId> [reden]`\nBant alle unieke auteurs van berichten tussen de twee grensberichten (inclusief) in het huidige kanaal.\n**Tip:** Klik met de rechtermuisknop op een bericht → Kopieer ID om bericht-ID's te krijgen.",
+        "noReasonProvided": "Massaal verbannen",
+        "invalidMessageIds": "Voer geldige bericht-ID's in (nummers van 17-22 cijfers).",
+        "couldNotDetermineChannel": "Kon het huidige kanaal niet bepalen.",
+        "couldNotAccessChannel": "Kon dit kanaal niet openen.",
+        "couldNotFindStartMessage": "Kon startbericht met ID `{startId}` niet vinden in dit kanaal.",
+        "couldNotFindEndMessage": "Kon eindbericht met ID `{endId}` niet vinden in dit kanaal.",
+        "statusFetching": "⏳ Berichten tussen de twee grenzen ophalen...",
+        "noBannableUsersFound": "Geen gebruikers gevonden die gebanned kunnen worden tussen die berichten (bots en jezelf worden uitgesloten).",
+        "confirmTitle": "⚠️ Bevestiging Massaverbanning",
+        "confirmDescription": "**{authorCount}** unieke gebruiker(s) gevonden in **{messageCount}** berichten.\n\n**Reden:** {reason}\n\nReageer met ✅ om te bevestigen of ❌ om te annuleren.\n*Dit verloopt over 30 seconden.*",
+        "confirmationReactionsFailed": "Kon geen bevestigingsreacties toevoegen. Zorg dat ik de **Reacties toevoegen**-permissie heb.",
+        "cancelled": "Massban geannuleerd.",
+        "statusBanning": "⏳ Bezig met het bannen van {authorCount} gebruiker(s)...",
+        "resultTitle": "Massban voltooid",
+        "resultDescription": "**Verbannen:** {banned}/{total}\n**Mislukt:** {failed}\n**Reden:** {reason}{failuresBlock}",
+        "failuresBlock": "\n\n**Mislukkingen:**\n{failuresPreview}{moreSuffix}",
+        "failuresMoreSuffix": "\n...en {moreCount} meer",
+        "failures": {
+          "networkError": "Netwerkfout",
+          "missingPermissions": "Ontbrekende rechten",
+          "unknownError": "Onbekende fout"
+        }
+      },
+      "modlogs": {
+        "invalidCase": "Gebruik: `{prefix}modlogs case <number>`",
+        "caseNotFound": "Case #{caseNumber} niet gevonden.",
+        "caseTitle": "Zaak #{caseNumber}",
+        "fieldAction": "Actie",
+        "fieldTarget": "Doelwit",
+        "fieldModerator": "Moderator",
+        "fieldReason": "Reden",
+        "fieldDuration": "Duur",
+        "invalidAction": "Ongeldig actietype. Geldig: {actions}",
+        "byLabel": "door",
+        "title": "Moderatiezaken",
+        "noResults": "Geen zaken gevonden die aan je filters voldoen.",
+        "footerHint": "{prefix}modlogs case <#> voor details",
+        "footerTruncated": "De nieuwste {count} van {total} overeenkomende zaken worden weergegeven.",
+        "errors": {
+          "generic": "Ophalen van moderatielogs mislukt. Probeer het opnieuw."
+        }
+      }
+    },
+    "admin": {
+      "clearprefix": {
+        "resetDone": "Serverprefix is gereset naar de standaard: `{defaultPrefix}`.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het wissen van het prefix."
+        }
+      },
+      "setprefix": {
+        "noCustomPrefix": "Er is geen aangepaste prefix ingesteld. De standaardprefix wordt gebruikt.",
+        "currentPrefixes": "Huidige prefix(en): {prefixes}",
+        "prefixEmpty": "Het prefix mag niet leeg zijn of alleen uit spaties bestaan.",
+        "prefixNoSpaces": "De prefix mag geen spaties bevatten.",
+        "prefixTooLong": "De prefix mag niet langer zijn dan {max} tekens.",
+        "success": "Serverprefix is ingesteld op `{newPrefix}`.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het instellen van het prefix."
+        }
+      },
+      "toggleAutomod": {
+        "enabled": "Automod is **ingeschakeld**. Niveau: `minimal` (anti-spam aan, anti-link uit). Gebruik `!toggle-antilink` / `!toggle-antispam` om aan te passen.",
+        "disabled": "Automod-systeem is **uitgeschakeld**.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het in-/uitschakelen van automod."
+        }
+      },
+      "leveling": {
+        "usage": "Gebruik: `{prefix}leveling <enable|disable|toggle|status>`",
+        "enabled": "Leveling is nu **ingeschakeld**. Leden kunnen XP verdienen en `{prefix}rank` / `{prefix}lb` gebruiken.",
+        "disabled": "Levelen is **uitgeschakeld**.",
+        "alreadyEnabled": "Levelen is al ingeschakeld op deze server.",
+        "alreadyDisabled": "Levelling is al uitgeschakeld op deze server.",
+        "status": "Levelen is **{enabled}**.\nBericht-XP: **{messageXp}** · Voice-XP: **{voiceXp}** · Reactie-XP: **{reactionXp}**\nGebruik `{prefix}leveling enable` of het dashboard om dit te wijzigen.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het bijwerken van leveling."
+        }
+      },
+      "toggleAntispam": {
+        "base": "Anti-spamfilter is **{status}**.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het in- of uitschakelen van anti-spam."
+        }
+      },
+      "toggleAntilink": {
+        "base": "Anti-link filter is **{status}**.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het in-/uitschakelen van anti-link."
+        }
+      },
+      "toggleAntireactionspam": {
+        "base": "Anti-reactiespam is **{status}**.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het in-/uitschakelen van anti-reactiespam."
+        }
+      },
+      "toggleGhostping": {
+        "base": "Anti-ghost ping-filter is **{status}**.",
+        "noteLevelOff": "**Let op:** Automod-niveau staat momenteel op `off`. Gebruik `{prefix}automod level minimal` (of hoger) of voer `{prefix}toggle-automod` uit zodat ghost ping-detectie werkt.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het in-/uitschakelen van anti-ghost ping."
+        }
+      },
+      "setlog": {
+        "noLogChannel": "Er is geen logkanaal ingesteld. Gebruik `{prefix}setlog #kanaal` om er een in te stellen.",
+        "currentLogChannel": "Huidig logkanaal: <#{channelId}>",
+        "cleared": "Modlogkanaal gewist.",
+        "setDone": "Modlogkanaal is ingesteld op <#{channelId}>.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het instellen van het logkanaal."
+        }
+      },
+      "setserverlog": {
+        "defaultLabel": "Standaard",
+        "notSet": "Niet ingesteld",
+        "noServerLogChannelSet": "Er is geen serverlogkanaal ingesteld. Gebruik `{prefix}setserverlog #kanaal` om er een in te stellen.\n\nJe kunt logs ook per categorie splitsen: `{prefix}setserverlog voice #voice-logs`",
+        "allEventsDefault": "\n*Alle gebeurtenissen gaan naar het standaardkanaal. Gebruik `{prefix}setserverlog <categorie> #kanaal` om ze te splitsen.*",
+        "cleared": "Serverlogkanaal gewist.",
+        "defaultChannel": "Standaardkanaal",
+        "logsUsageHint": "Gebruik `{prefix}setserverlog {category} #kanaal` om in te stellen, of `{prefix}setserverlog {category} clear` om te resetten.",
+        "logsWillGoToDefaultChannel": "**{categoryLabel}**-logs gaan nu naar het standaardkanaal.",
+        "logsWillGoToChannel": "**{categoryLabel}** logs gaan nu naar <#{channelId}>.",
+        "invalidArgument": "Ongeldig argument. Gebruik:\n`{prefix}setserverlog #kanaal` - stel het standaard logkanaal in\n`{prefix}setserverlog <categorie> #kanaal` - splitsen per categorie\nCategorieën: {categories}",
+        "setDone": "Serverlogkanaal is ingesteld op <#{channelId}>.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het instellen van het serverlogkanaal."
+        }
+      },
+      "roleclear": {
+        "usage": "Gebruik: `{prefix}roleclear <@rol`",
+        "removing": "**{roleName}** verwijderen van alle leden die deze hebben... dit kan even duren.",
+        "noMembersHaveRole": "Geen leden hebben momenteel **{roleName}**.",
+        "donePrefix": "Gelukt! **{roleName}** verwijderd bij **{removed}** lid/leden.",
+        "doneFailedSuffix": "{failed} mislukt (ontbrekende rechten of onbekende fout)."
+      },
+      "status": {
+        "title": "Serverinstellingen voor {guildName}",
+        "automodSystemField": "Automod-systeem",
+        "antiLinkField": "Anti-Link",
+        "antiSpamField": "Anti-Spam",
+        "antiReactionSpamField": "Anti-reactiespam",
+        "antiGhostPingField": "Anti-Ghost Ping",
+        "enabled": "Ingeschakeld ({value})",
+        "disabled": "Uitgeschakeld",
+        "enabledSimple": "Ingeschakeld",
+        "disabledSimple": "Uitgeschakeld",
+        "logChannelField": "Logkanaal",
+        "muteRoleField": "Mute-rol",
+        "customPrefixField": "Aangepaste Prefix",
+        "logNotSet": "Niet ingesteld",
+        "muteNotSet": "Niet ingesteld",
+        "customPrefixDefaultValue": "Standaard (`{defaultPrefix}`)",
+        "footer": "Gebruik !toggle-automod, !toggle-antilink, !toggle-antispam, !toggle-ghostping om instellingen te wijzigen",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het ophalen van de serverinstellingen."
+        }
+      },
+      "autorole": {
+        "usage": "**Gebruik:**\n`{prefix}autorole set <@rol` - stel de rol in die elk nieuw lid krijgt\n`{prefix}autorole disable` - verwijder de auto-rol\n`{prefix}autorole status` - toon de huidige auto-rol",
+        "roleRequiredUsage": "Geef een rol op. Gebruik: `{prefix}autorole set <@rol`",
+        "hierarchyWarning": "\n\nMijn rol staat momenteel onder **{roleName}** - nieuwe leden krijgen deze rol pas als je mijn rol boven deze rol plaatst in **Server Settings > Roles**.",
+        "setDone": "Auto-rol ingesteld op **{roleName}**. Nieuwe leden krijgen deze rol automatisch bij het joinen.",
+        "disabledNotEnabled": "Auto-role is momenteel niet ingeschakeld.",
+        "disabledDone": "Auto-role is uitgeschakeld. Nieuwe leden krijgen niet langer automatisch een rol.",
+        "statusDisabled": "Auto-role is momenteel **uitgeschakeld**. Gebruik `{prefix}autorole set <@rol` om het in te schakelen.",
+        "statusEnabled": "Auto-role is momenteel ingesteld op **{roleName}** (<@&{roleId}>).",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het bijwerken van de auto-role-instelling."
+        }
+      },
+      "roleall": {
+        "usage": "Gebruik: `{prefix}roleall <@rol`",
+        "assigning": "**{roleName}** aan alle leden toewijzen... dit kan even duren.",
+        "noMembersFound": "Geen leden gevonden.",
+        "resultPrefix": "Klaar! **{roleName}** toegewezen aan **{assigned}** lid/leden.",
+        "skippedSuffix": "{skipped} had het al.",
+        "failedSuffix": "{failed} mislukt (ontbrekende rechten of onbekende fout)."
+      },
+      "setstaff": {
+        "status": "**Staffrapport Configuratie**\nUitvoerkanaal: {ch}\nRapportinbox-kanaal: {inbox}\nStaffrol-ping: {role}\n\n**Tips:**\n- Zet in het inboxkanaal `Berichtgeschiedenis Lezen` uit voor `@everyone` zodat leden geen eerdere berichten kunnen lezen\n- Leden kunnen er nog steeds in typen - de bot verwijdert berichten direct en stuurt ze door naar staff",
+        "channelUsage": "Gebruik: `{prefix}setstaff channel <#kanaal>` of `{prefix}setstaff channel clear`",
+        "channelCleared": "Staff outputkanaal is gewist.",
+        "channelSetDone": "Staffuitvoerkanaal ingesteld op <#{channelId}>. Meldingen van `{prefix}report` en het inboxkanaal worden daarnaartoe doorgestuurd.",
+        "roleUsage": "Gebruik: `{prefix}setstaff role <@rol` of `{prefix}setstaff role clear`",
+        "roleCleared": "Staffrol-ping is verwijderd. Meldingen worden nog steeds geplaatst, maar er wordt geen rol gepingd.",
+        "roleSetDone": "Staffrol ingesteld op <@&{roleId}>. Ze worden bij elke nieuwe melding gepingd.",
+        "reportChannelUsage": "Gebruik: `{prefix}setstaff reportchannel <#kanaal>` of `{prefix}setstaff reportchannel clear`",
+        "reportChannelCleared": "Meldingskanaal is gewist. De bot houdt dit kanaal niet langer in de gaten.",
+        "reportChannelSetDone": "Rapportinbox-kanaal ingesteld op <#{channelId}>.\nElk bericht dat daar wordt verstuurd, wordt stilletjes verwijderd en doorgestuurd naar het staff-outputkanaal.\n\n**Aanbevolen kanaalpermissies voor <#{channelId}>:**\n- `@everyone`: Berichten versturen = aan, Berichtgeschiedenis lezen = **uit**, Kanaal bekijken = aan\n- Staff-rol: alle permissies zoals normaal\nZo kunnen leden een report indienen, maar kunnen ze niet lezen wat anderen hebben verstuurd.",
+        "unknownSubcommand": "Onbekend subcommando. Gebruik `{prefix}setstaff status`, `{prefix}setstaff channel`, `{prefix}setstaff role`, of `{prefix}setstaff reportchannel`.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het bijwerken van de staff-instellingen."
+        }
+      },
+      "blacklist": {
+        "usage": "Gebruik: `{prefix}blacklist add <#kanaal> | remove <#kanaal> | list | clear`\nGeblokkeerde kanalen zorgen ervoor dat de bot niet reageert op niet-staff leden.",
+        "specifyChannelToAdd": "Geef een kanaal op om toe te voegen. Gebruik: `{prefix}blacklist add <#kanaal>`",
+        "invalidChannel": "Ongeldig kanaal. Gebruik een kanaalvermelding of kanaal-ID.",
+        "alreadyBlacklisted": "<#{channelId}> staat al op de blacklist.",
+        "addedToBlacklist": "<#{channelId}> is toegevoegd aan de blacklist. Niet-stafleden kunnen daar geen botcommando's gebruiken.",
+        "specifyChannelToRemove": "Geef een kanaal op om te verwijderen. Gebruik: `{prefix}blacklist remove <#kanaal>`",
+        "notInBlacklist": "<#{channelId}> staat niet op de blacklist.",
+        "removedFromBlacklist": "<#{channelId}> van de blacklist verwijderd.",
+        "noChannelsBlacklisted": "Er zijn momenteel geen kanalen op de zwarte lijst.",
+        "blacklistedChannels": "**Geblokkeerde kanalen:**\n{channelList}",
+        "noChannelsToClear": "Er zijn geen geblokkeerde kanalen om te wissen.",
+        "clearedAll": "Alle kanalen uit de blacklist verwijderd.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het beheren van de blacklist."
+        }
+      },
+      "ticket": {
+        "openNotice": "Tickets worden nu aangemaakt door te reageren op het ticketpaneel. Vraag een admin om `{prefix}ticket setup channel create` uit te voeren als er nog geen paneel is ingesteld.",
+        "missingManageServerPermission": "Je hebt de **Server beheren**-permissie nodig om tickets te configureren.",
+        "processingError": "Er is een fout opgetreden bij het verwerken van het ticket-commando.",
+        "access": {
+          "couldNotVerifyPermissionsRightNow": "Kon je rechten momenteel niet verifiëren. Probeer het opnieuw.",
+          "supportRoleOrManageServer": "Je hebt een **support role** of **Manage Server** permissie nodig om tickets te beheren."
+        },
+        "help": {
+          "body": "**Ticketsysteem**\n`{prefix}ticket claim` - claim dit ticket (laat zien dat jij het behandelt)\n`{prefix}ticket close [reden]` - sluit het huidige ticket\n`{prefix}ticket add <@user>` - voeg een gebruiker toe aan het ticket\n`{prefix}ticket remove <@user>` - verwijder een gebruiker uit het ticket\n`{prefix}ticket panel [#kanaal]` - plaats het ticket-reactiepaneel\n`{prefix}ticket setup` - configureer het ticketsysteem (admin)\n\n*Om een ticket aan te maken, react je op het ticketpaneelbericht in het aangewezen kanaal.*"
+        },
+        "setup": {
+          "category": {
+            "usage": "Gebruik: `{prefix}ticket setup category <categoryId>`\nGeef de ID van een bestaand categoriekanaal op, of gebruik `create` om er een aan te maken.",
+            "created": "Ticketcategorie aangemaakt: **Tickets** (<#{categoryId}>)",
+            "failedToCreate": "Categorie aanmaken mislukt: {error}",
+            "invalidCategoryId": "Geef een geldig categoriekanaal-ID op.",
+            "setDone": "Ticketcategorie ingesteld op <#{categoryId}>."
+          },
+          "channel": {
+            "setupFirst": "Stel eerst een ticketcategorie in: `{prefix}ticket setup category <id|create>`",
+            "created": "Ticketkanaal aangemaakt: <#{channelId}> - gebruikers kunnen nu reageren om tickets aan te maken!",
+            "failedToCreate": "Kanaal aanmaken voor ticket mislukt: {error}",
+            "couldNotFind": "Kon dat kanaal niet vinden.",
+            "botPermissionUpdateFailed": "Ik kon mijn rechten in <#{channelId}> niet bijwerken. Zorg dat ik **Kanalen beheren** heb, of geef me handmatig **Berichten verzenden** en **Reacties toevoegen** in dat kanaal.",
+            "panelPosted": "Ticketpaneel geplaatst in <#{channelId}> - gebruikers kunnen nu reageren om tickets aan te maken!",
+            "failedToPostPanel": "Ticketpaneel plaatsen mislukt: {error}"
+          },
+          "role": {
+            "noSupportRoles": "Geen supportrollen geconfigureerd.\n\n`{prefix}ticket setup role add <@rol` - voeg een supportrol toe\n`{prefix}ticket setup role remove <@rol` - verwijder een supportrol\n`{prefix}ticket setup role clear` - verwijder alle supportrollen",
+            "list": "**Supportrollen ({count})**: {roleList}",
+            "clearedAll": "Alle ticket-supportrollen gewist.",
+            "addUsage": "Gebruik: `{prefix}ticket setup role add <@rol`",
+            "removeUsage": "Gebruik: `{prefix}ticket setup role remove <@rol`",
+            "alreadySupportRole": "<@&{roleId}> is al een supportrol.",
+            "maxSupportRoles": "Maximum van 10 supportrollen toegestaan.",
+            "added": "<@&{roleId}> toegevoegd als ticket-supportrol. ({total} in totaal)",
+            "notSupportRole": "<@&{roleId}> is geen support-rol.",
+            "removed": "<@&{roleId}> verwijderd uit ticket support-rollen. ({remaining} resterend)",
+            "generalListUsage": "Gebruik:\n`{prefix}ticket setup role add <@rol` - een supportrol toevoegen\n`{prefix}ticket setup role remove <@rol` - een supportrol verwijderen\n`{prefix}ticket setup role clear` - alles verwijderen\n`{prefix}ticket setup role` - huidige rollen weergeven"
+          },
+          "log": {
+            "usage": "Gebruik: `{prefix}ticket setup log <#kanaal>`",
+            "cleared": "Ticketlogkanaal gewist.",
+            "setDone": "Ticketlogkanaal ingesteld op <#{channelId}>."
+          },
+          "max": {
+            "usage": "Gebruik: `{prefix}ticket setup max <1-10>` - max aantal open tickets per gebruiker.",
+            "setDone": "Max aantal open tickets per gebruiker ingesteld op **{maxOpen}**."
+          },
+          "message": {
+            "usage": "Gebruik: `{prefix}ticket setup message <tekst>` of `{prefix}ticket setup message clear`\nVariabelen: `{user}` `{server}` `{ticket}`",
+            "cleared": "Aangepast ticket-openingsbericht gewist.",
+            "tooLong": "Bericht te lang (max 1000 tekens).",
+            "setDone": "Ticket-openingsbericht ingesteld."
+          }
+        },
+        "claim": {
+          "alreadyClaimed": "Dit ticket is al geclaimd door <@{claimedBy}>."
+        },
+        "add": {
+          "usage": "Gebruik: `{prefix}ticket add <@user>`",
+          "channelNotFound": "Kon dit kanaal niet vinden.",
+          "added": "<@{userId}> is toegevoegd aan dit ticket.",
+          "failedToAddUser": "Gebruiker toevoegen mislukt: {error}"
+        },
+        "remove": {
+          "usage": "Gebruik: `{prefix}ticket remove <@user>`",
+          "openedByCannotRemove": "Je kunt de persoon die het ticket heeft geopend niet verwijderen.",
+          "channelNotFound": "Kon dit kanaal niet vinden.",
+          "removed": "<@{userId}> is uit dit ticket verwijderd.",
+          "failedToRemoveUser": "Verwijderen van gebruiker mislukt: {error}"
+        },
+        "panel": {
+          "ticketNotSetup": "Ticketsysteem is niet ingesteld. Voer eerst `{prefix}ticket setup category <id|create>` uit.",
+          "channelNotFound": "Kan het doelkanaal niet vinden.",
+          "posted": "Ticketpaneel geplaatst in <#{channelId}> - gebruikers kunnen reageren om een ticket aan te maken!",
+          "failedToSend": "Verzenden van paneel mislukt: {error}"
+        },
+        "user": {
+          "panelEmbed": {
+            "title": "Support Tickets",
+            "description": "Hulp nodig? Reageer hieronder met {emoji} om een ticket aan te maken!\n\nEr wordt een privékanaal voor je aangemaakt en een staflid helpt je zo snel mogelijk verder.\n\n*Je kunt maar één ticket per 10 minuten aanmaken.*",
+            "footer": "Reageer hieronder om een ticket te openen"
+          },
+          "ticketEmbed": {
+            "title": "Ticket #{ticketNumber}",
+            "subjectField": "Onderwerp"
+          },
+          "defaultOpenMessage": "Welkom <@{userId}>! Een staflid helpt je zo snel mogelijk.\n\nGebruik `{prefix}ticket close` om dit ticket te sluiten zodra je probleem is opgelost.",
+          "createdNotice": "Je ticket is aangemaakt! Ga naar <#{channelId}> (ticket #{ticketNumber}).",
+          "reasons": {
+            "maxOpenTickets": "Je hebt al **{openTickets}** open ticket(s). Maximum is **{maxOpen}**. Sluit eerst een bestaand ticket.",
+            "waitCooldown": "Wacht **{remaining}** voordat je een nieuw ticket aanmaakt.",
+            "failedToCreateChannel": "Kanaal voor ticket kon niet worden aangemaakt: {error}"
+          },
+          "claimEmbed": {
+            "title": "Ticket #{ticketNumber} - Geclaimd",
+            "description": "<@{userId}> heeft dit ticket geclaimd en zal dit afhandelen."
+          },
+          "closeEmbed": {
+            "title": "Ticket #{ticketNumber} - Gesloten",
+            "description": "Gesloten door <@{userId}>",
+            "reasonField": "Reden",
+            "claimedByField": "Behandeld door"
+          },
+          "logEmbed": {
+            "titleClosed": "Ticket #{ticketNumber} Gesloten",
+            "openedByField": "Geopend door",
+            "closedByField": "Gesloten door",
+            "claimedByField": "Geclaimd door",
+            "reasonField": "Reden",
+            "subjectField": "Onderwerp",
+            "messagesField": "Berichten"
+          },
+          "dmEmbed": {
+            "titleClosed": "Ticket #{ticketNumber} - Gesloten",
+            "description": "Je ticket in **{guildName}** is gesloten door <@{userId}>.",
+            "reasonField": "Reden"
+          }
+        },
+        "setupEmbed": {
+          "title": "Ticketsysteemconfiguratie",
+          "notSet": "Niet ingesteld",
+          "customMessageValues": {
+            "set": "Instellen",
+            "default": "Standaard"
+          },
+          "fields": {
+            "category": "Categorie",
+            "ticketChannel": "Ticketkanaal",
+            "supportRole": "Ondersteuningsrol",
+            "logChannel": "Logkanaal",
+            "maxOpen": "Max. Open",
+            "customMessage": "Aangepast bericht",
+            "setupCommands": "Setup-commando's"
+          },
+          "setupCommands": "`{prefix}ticket setup category <id|create>` - stel ticketcategorie in\n`{prefix}ticket setup channel [#kanaal|create]` - stel/maak het ticket-reactiekanaal in\n`{prefix}ticket setup role add/remove <@rol` - beheer supportrollen\n`{prefix}ticket setup log <#kanaal>` - stel transcript-logkanaal in\n`{prefix}ticket setup max <1-10>` - max. open tickets per gebruiker\n`{prefix}ticket setup message <tekst>` - aangepast openingsbericht ({user} {server} {ticket})"
+        },
+        "notOpenError": "Dit commando kan alleen worden gebruikt in een open ticketkanaal."
+      },
+      "automod": {
+        "errorGeneric": "Er is een fout opgetreden bij het uitvoeren van dit commando.",
+        "yes": "Ja",
+        "no": "Nee",
+        "levelDescriptions": {
+          "off": "Alle automod-modules uitgeschakeld",
+          "minimal": "Anti-spam aan, anti-link uit, soepele mention-/regellimieten",
+          "medium": "Anti-spam + anti-link + anti-reactiespam aan, gematigde limieten",
+          "high": "Anti-spam + anti-link + anti-reactiespam aan, strikte limieten"
+        },
+        "status": {
+          "none": "Geen",
+          "title": "Automod-instellingen - {guildName}",
+          "fieldLevel": "Niveau",
+          "fieldAntiSpam": "Anti-Spam",
+          "fieldAntiLink": "Anti-Link",
+          "fieldAntiReactionSpam": "Anti-Reactiespam",
+          "fieldGhostPing": "Spook Ping",
+          "fieldSpamThresholds": "Spamdrempels",
+          "fieldAllowedDomains": "Toegestane domeinen (extra)",
+          "fieldExemptRoles": "Uitgesloten rollen",
+          "fieldExemptChannels": "Uitgezonderde kanalen",
+          "levelValue": "`{level}` - {description}",
+          "spamThresholdsValue": "**Max berichten:** {maxMessages} per **{timeWindow}s** venster\n**Timeout na:** {violationThreshold} overtredingen -> {timeoutDuration} min timeout",
+          "footer": "Gebruik !automod <subcommand> om instellingen te wijzigen"
+        },
+        "level": {
+          "validLevels": "Geldige levels: `{levels}`",
+          "setDone": "Automodniveau ingesteld op `{level}`. {description}."
+        },
+        "spam": {
+          "messagesRange": "`messages` moet tussen 2 en 20 liggen.",
+          "windowRange": "`window` moet tussen 1 en 60 seconden liggen.",
+          "timeoutRange": "`timeout` moet tussen 1 en 60 minuten liggen.",
+          "violationsRange": "`violations` moet tussen 1 en 10 liggen.",
+          "usage": "Gebruik: `!automod spam <messages|window|timeout|violations> <value>`\n- `messages` - max berichten per venster (2-20, standaard 5)\n- `window` - trackingvenster in seconden (1-60, standaard 5)\n- `timeout` - timeoutduur in minuten (1-60, standaard 10)\n- `violations` - overtredingen vóór timeout (1-10, standaard 3)",
+          "updated": "Spam-instellingen bijgewerkt.\nMax **{maxMessages}** berichten per **{timeWindow}s** -> timeout na **{violationThreshold}** overtredingen (**{timeoutDuration} min**)."
+        },
+        "link": {
+          "usage": "Gebruik:\n`!automod link allow <domain>` - een domein uitsluiten van het linkfilter\n`!automod link deny <domain>` - een domeinuitsluiting verwijderen\n\nVoorbeeld: `!automod link allow youtube.com`",
+          "alreadyAllowed": "`{domain}` staat al in de toegestane lijst.",
+          "added": "`{domain}` toegevoegd aan de linkallowlist. Links van dit domein worden niet meer verwijderd.",
+          "notAllowed": "`{domain}` staat niet op de lijst met toegestane domeinen.",
+          "removed": "`{domain}` verwijderd uit de link-allowlist."
+        },
+        "reactionspam": {
+          "usage": "Gebruik: `!automod reactionspam <on|off>`",
+          "base": "Anti-reactiespam is **{status}**."
+        },
+        "ghostping": {
+          "usage": "Gebruik: `!automod ghostping <on|off>`",
+          "base": "Ghost ping-detectie is **{status}**.",
+          "noteLevelOff": "\n**Let op:** Automod-niveau staat op `off` - voer `!automod level minimal` uit om dit van kracht te laten worden."
+        },
+        "exempt": {
+          "usage": "Gebruik:\n`!automod exempt role add <@rol` - een rol vrijstellen van alle automod-controles\n`!automod exempt role remove <@rol` - rolvrijstelling verwijderen\n`!automod exempt channel add <#kanaal>` - automod uitschakelen in een kanaal\n`!automod exempt channel remove <#kanaal>` - automod opnieuw inschakelen in een kanaal",
+          "roleAlreadyExempt": "Die rol is al uitgezonderd.",
+          "roleNowExempt": "Leden met <@&{roleId}> zijn nu uitgezonderd van automod.",
+          "roleNotExempt": "Die rol staat niet op de uitzonderingslijst.",
+          "roleNoLongerExempt": "<@&{roleId}> is niet langer uitgezonderd van automod.",
+          "invalidChannel": "Geef een geldig kanaal-mention of kanaal-ID op.",
+          "channelAlreadyExempt": "Dat kanaal is al uitgezonderd.",
+          "channelNowDisabled": "Automod is nu uitgeschakeld in <#{channelId}>.",
+          "channelNotExempt": "Dat kanaal staat niet op de uitzonderingslijst.",
+          "channelReEnabled": "Automod is opnieuw ingeschakeld in <#{channelId}>."
+        },
+        "help": {
+          "title": "Automod - Subcommando's",
+          "fieldStatusName": "!automod status",
+          "fieldStatusValue": "Alle huidige automod-instellingen tonen",
+          "fieldLevelName": "!automod level <off|minimal|medium|high>",
+          "fieldLevelValue": "`off` - alles uitschakelen\n`minimal` - alleen anti-spam\n`medium` - anti-spam + anti-link\n`high` - anti-spam + anti-link, strikte limieten",
+          "fieldSpamName": "!automod spam <messages|window|timeout|violations> <waarde>",
+          "fieldSpamValue": "Spamdetectie fijn afstemmen:\n`messages` 2-20 (standaard 5) - `window` 1-60 s (standaard 5)\n`violations` 1-10 (standaard 3) - `timeout` 1-60 min (standaard 10)",
+          "fieldLinkName": "!automod link <allow|deny> <domein>",
+          "fieldLinkValue": "Domeinen beheren die zijn uitgesloten van het linkfilter\nVoorbeeld: `!automod link allow youtube.com`",
+          "fieldReactionSpamName": "!automod reactionspam <on|off>",
+          "fieldReactionSpamValue": "Detectie van reactie-spam in-/uitschakelen",
+          "fieldGhostPingName": "!automod ghostping <on|off>",
+          "fieldGhostPingValue": "Ghost-pings detecteren in- of uitschakelen",
+          "fieldExemptRoleName": "!automod exempt role <add|remove> <@rol>",
+          "fieldExemptRoleValue": "Sluit een rol uit van alle automod-controles",
+          "fieldExemptChannelName": "!automod exempt channel <add|remove> <#kanaal>",
+          "fieldExemptChannelValue": "Automod uitschakelen in een specifiek kanaal",
+          "footer": "Vereist de 'Server beheren'-machtiging"
+        }
+      },
+      "starboard": {
+        "adminRequired": "Je hebt de **Server beheren**-permissie nodig om het starboard te configureren.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het uitvoeren van het starboard-commando."
+        },
+        "help": {
+          "title": "starboard",
+          "description": "Starboard licht populaire berichten uit.",
+          "fieldUsage": "Gebruik",
+          "fieldAliases": "Aliassen",
+          "fieldCooldown": "Cooldown",
+          "fieldPublic": "Openbaar",
+          "fieldAdmin": "Admin"
+        },
+        "setup": {
+          "usage": "Gebruik: `{prefix}starboard setup #kanaal`",
+          "title": "⭐ Starboard-kanaal ingesteld",
+          "description": "Starboard-kanaal is ingesteld op <#{channelId}> en het starboard is nu **ingeschakeld**.",
+          "fieldThreshold": "Drempel",
+          "fieldEmoji": "Emoji",
+          "thresholdReactions": "{threshold} reacties"
+        },
+        "threshold": {
+          "usage": "Gebruik: `{prefix}starboard threshold <1-100>`\nHuidig: **{current}**",
+          "setDone": "⭐ Starboarddrempel ingesteld op **{threshold}** reactie(s)."
+        },
+        "emoji": {
+          "usage": "Gebruik: `{prefix}starboard emoji <emoji>`\nHuidig: **{currentEmoji}**",
+          "setDone": "⭐ Starboard-emoji ingesteld op {emoji}"
+        },
+        "toggle": {
+          "setDone": "⭐ Starboard is nu **{status}**."
+        },
+        "selfstar": {
+          "setDone": "⭐ Self-starren is nu **{status}**."
+        },
+        "ignorechannel": {
+          "usage": "Gebruik: `{prefix}starboard ignorechannel #kanaal`",
+          "nowIgnored": "⭐ <#{channelId}> wordt nu **genegeerd** door de starboard.",
+          "noLongerIgnored": "⭐ <#{channelId}> wordt niet langer genegeerd door de starboard."
+        },
+        "ignorerole": {
+          "usage": "Gebruik: `{prefix}starboard ignorerole @role`",
+          "invalidRole": "Geef een geldige rolvermelding of ID op.",
+          "nowExcluded": "⭐ <@&{roleId}> is nu **uitgesloten** van sterren.",
+          "canStarAgain": "⭐ <@&{roleId}> kan berichten weer starren."
+        },
+        "settings": {
+          "title": "⭐ Starboard Configuratie",
+          "status": "Status",
+          "enabled": "✅ Ingeschakeld",
+          "disabled": "❌ Uitgeschakeld",
+          "notSet": "Niet ingesteld",
+          "threshold": "Drempel",
+          "thresholdReactions": "{threshold} reacties",
+          "emoji": "Emoji",
+          "selfStar": "Zelf-Star",
+          "allowed": "Toegestaan",
+          "notAllowed": "Niet toegestaan",
+          "ignoreBots": "Bots negeren",
+          "yes": "Ja",
+          "no": "Nee",
+          "ignoredChannels": "Genegeerde kanalen",
+          "ignoredRoles": "Genegeerde rollen",
+          "none": "Geen"
+        },
+        "leaderboard": {
+          "none": "Nog geen berichten met sterren!",
+          "title": "⭐ Starboard Ranglijst",
+          "footer": "Top {count} met ster gemarkeerde berichten"
+        },
+        "topusers": {
+          "none": "Nog geen berichten met sterren!",
+          "title": "⭐ Gebruikers met Meeste Sterren",
+          "footer": "Top {count} gebruikers met de meeste ontvangen sterren"
+        },
+        "stats": {
+          "title": "⭐ Starboard-statistieken",
+          "trackedMessages": "Gevolgde berichten",
+          "totalStars": "Totaal aantal sterren",
+          "postedToStarboard": "Naar Starboard gepost"
+        },
+        "force": {
+          "usage": "Gebruik: `{prefix}starboard force <messageLink|berichtId> [kanaalId]`",
+          "noStarboardChannel": "Er is geen starboard-kanaal ingesteld. Gebruik eerst `{prefix}starboard setup #kanaal`.",
+          "invalidMessageLinkOrId": "Geef een geldige berichtlink of bericht-ID op.",
+          "couldNotDetermineChannel": "Kon het kanaal niet bepalen. Geef een berichtlink op of vermeld het kanaal.",
+          "couldNotFetchMessage": "Kon dat bericht niet ophalen.",
+          "forceAdded": "⭐ Bericht is geforceerd toegevoegd aan de starboard!",
+          "failed": "Bericht kon niet geforceerd worden toegevoegd: {error}",
+          "unknownError": "Onbekende fout"
+        },
+        "remove": {
+          "usage": "Gebruik: `{prefix}starboard remove <berichtId>`",
+          "invalidMessageId": "Geef een geldig bericht-ID op.",
+          "notInStarboard": "Dat bericht staat niet in het starboard.",
+          "done": "⭐ Bericht is verwijderd van het starboard."
+        },
+        "unknownSubcommand": "Onbekend subcommando. Gebruik `{prefix}starboard help` voor een lijst met commando's."
+      },
+      "reactionrole": {
+        "errors": {
+          "postFailed": "Het plaatsen van het paneel is mislukt. Controleer of ik toestemming heb om daar berichten te sturen.",
+          "saveFailed": "Opslaan van de reactierol is mislukt. Probeer het opnieuw.",
+          "editFailed": "Het bewerken van het paneel is mislukt. Zorg ervoor dat het bericht van mij is.",
+          "updateFailed": "Reactierol bijwerken mislukt. Probeer het opnieuw.",
+          "clearFailed": "Reactierollen wissen mislukt. Probeer het opnieuw.",
+          "listFailed": "Reactierollen ophalen mislukt. Probeer het opnieuw.",
+          "dmUpdateFailed": "Bijwerken van DM-instelling mislukt. Probeer het opnieuw.",
+          "switchSaveFailed": "Opslaan van de reactierol-schakelaar is mislukt. Probeer het opnieuw."
+        },
+        "help": {
+          "title": "Reactierol-commando's",
+          "fieldPostName": "{prefix}rr post <#kanaal> [tekst]",
+          "fieldPostValue": "De bot plaatst een reactierol-paneel in het kanaal",
+          "fieldAddName": "{prefix}rr add <#kanaal> <berichtId> <emoji> <@rol",
+          "fieldAddValue": "Koppel een emoji aan een rol op een bericht\nPlak de emoji direct of gebruik een shortcode - vind emojis op [getemoji.com](https://getemoji.com)",
+          "fieldAddMultiName": "{prefix}rr addmulti <#kanaal> <berichtId> <emoji> <@rol1> <@rol2> ...",
+          "fieldAddMultiValue": "Wijs een emoji toe aan **meerdere rollen** tegelijk (max. 10)",
+          "fieldRemoveName": "{prefix}rr remove <#kanaal> <berichtId> <emoji>",
+          "fieldRemoveValue": "Verwijder een emoji-rolkoppeling",
+          "fieldEditName": "{prefix}rr edit <#kanaal> <berichtId> [nieuwe tekst]",
+          "fieldEditValue": "De tekst van een bestaand reactierolpaneel bewerken",
+          "fieldClearName": "{prefix}rr clear <berichtId>",
+          "fieldClearValue": "Verwijder alle reactierollen van een bericht en zet het terug naar 0/20",
+          "fieldListName": "{prefix}rr list",
+          "fieldListValue": "Toon alle geconfigureerde reactierol-panelen",
+          "fieldDmName": "{prefix}rr dm <on|off>",
+          "fieldDmValue": "DM-meldingen in-/uitschakelen wanneer rollen worden toegewezen/verwijderd",
+          "fieldSwitchName": "{prefix}rr switch <#kanaal> <berichtId> <emoji> <@removeRole> <@addRole>",
+          "fieldSwitchValue": "Koppel een emoji om rollen te wisselen: verwijdert één rol en voegt een andere toe",
+          "footer": "Tip: Kopieer emoji-tekens rechtstreeks van getemoji.com - shortcodes zoals :white_check_mark: werken ook"
+        },
+        "common": {
+          "channelNotFound": "Kanaal niet gevonden.",
+          "channelNotFoundDetailed": "Kanaal niet gevonden. Vermeld het, gebruik de ID, of typ de naam.",
+          "invalidEmoji": "Ongeldige emoji. Gebruik de emoji direct (plak hem), een shortcode (`:white_check_mark:`), of een custom server-emoji (`<:name:id>`).",
+          "messageNotFoundDetailed": "Bericht niet gevonden in dat kanaal. Controleer het bericht-ID en het kanaal nog eens.",
+          "maxPairs": "Dit paneel heeft al het maximum van 20 emoji-rolparen.",
+          "alreadyMapped": "{emojiArg} is al gekoppeld aan dat bericht.",
+          "reactPermissionError": "Ik kon de {emojiArg} reactie niet aan dat bericht toevoegen. Controleer of de emoji geldig is en of ik de **Add Reactions**-permissie heb in <#{channelId}>."
+        },
+        "post": {
+          "usage": "Gebruik: `{prefix}rr post <#kanaal> [berichttekst]`",
+          "success": "Paneel geplaatst in <#{channelId}>.\nMessage ID: `{messageId}`\n\nOm rollen aan dit paneel toe te voegen, gebruik:\n`{prefix}rr add #{channelName} {messageId} <emoji> <@rol`\n\n**Voorbeeld:** `{prefix}rr add #{channelName} {messageId} ⭐ @Member`"
+        },
+        "add": {
+          "usage": "Gebruik: `{prefix}rr add <#kanaal> <berichtId> <emoji> <@rol`",
+          "invalidRole": "Ongeldige rol. Vermeld een rol, geef de ID op, of typ de rolnaam.",
+          "roleNotFound": "Rol niet gevonden. Zorg ervoor dat de rol bestaat en dat de bot deze kan zien.",
+          "done": "Klaar! {emojiArg} is nu gekoppeld aan <@&{roleId}>.{hierarchyWarning}"
+        },
+        "edit": {
+          "usage": "Gebruik: `{prefix}rr edit <#kanaal> <berichtId> [nieuwe tekst]`\nLaat tekst leeg om ernaar gevraagd te worden.",
+          "panelNotFound": "Geen reactierol-paneel gevonden voor dat bericht. Gebruik `{prefix}rr list` om geconfigureerde panelen te bekijken.",
+          "missingTextPrompt": "Geef de nieuwe tekst voor het paneel op.\nGebruik: `{prefix}rr edit #{channelName} {messageId} Je nieuwe paneeltekst hier`\n\nTip: Je kunt markdown-opmaak gebruiken zoals **vet**, *cursief*, __onderstreept__ en ~~doorhalen~~.",
+          "updated": "Paneel bijgewerkt in <#{channelId}>."
+        },
+        "remove": {
+          "usage": "Gebruik: `{prefix}rr remove <#kanaal> <berichtId> <emoji>`",
+          "noneConfigured": "Geen reactierollen geconfigureerd voor dat bericht.",
+          "mappingNotFound": "Geen koppeling gevonden voor {emojiArg} op dat bericht.",
+          "done": "De {emojiArg} koppeling verwijderd."
+        },
+        "clear": {
+          "usage": "Gebruik: `{prefix}rr clear <berichtId>`",
+          "noneFound": "Geen reactierollen gevonden voor dat bericht-ID. Gebruik `{prefix}rr list` om geconfigureerde panelen te bekijken.",
+          "done": "{count} reactierol(len) verwijderd van dat bericht. Je kunt er nu weer maximaal 20 toevoegen."
+        },
+        "list": {
+          "noneConfigured": "Er zijn geen reactierolpanelen geconfigureerd op deze server.",
+          "title": "Reaction Role Panelen",
+          "panelName": "Panel {index} - <#{channelId}> | `{messageId}`",
+          "noMappingsYet": "*Nog geen emoji-koppelingen*",
+          "dmOn": "Aan",
+          "dmOff": "Uit",
+          "footer": "DM-meldingen: {dmStatus} - gebruik \"{prefix}rr dm on/off\" om te wisselen"
+        },
+        "dm": {
+          "usage": "Gebruik: `{prefix}rr dm <on|off>`",
+          "done": "DM-meldingen voor reactierollen zijn nu **{toggle}**."
+        },
+        "switch": {
+          "usage": "Gebruik: `{prefix}rr switch <#kanaal> <berichtId> <emoji> <@removeRole> <@addRole>`\nWanneer een gebruiker reageert, zal de bot de eerste rol **verwijderen** en de tweede **toevoegen**.",
+          "invalidRemoveRole": "Ongeldige rol om te verwijderen. Vermeld een rol, geef de ID op, of typ de rolnaam.",
+          "invalidAddRole": "Ongeldige rol om toe te voegen. Vermeld een rol, geef het ID op, of typ de rolnaam.",
+          "messageNotFound": "Bericht niet gevonden in dat kanaal.",
+          "addRoleNotFound": "Rol om toe te voegen niet gevonden. Zorg ervoor dat de rol bestaat en dat de bot deze kan zien.",
+          "removeRoleNotFound": "Verwijder-rol niet gevonden. Zorg dat de rol bestaat en dat de bot deze kan zien.",
+          "cannotManageAddRoleFallback": "Je kunt de add-role niet beheren.",
+          "cannotManageRemoveRoleFallback": "Je kunt de rol om te verwijderen niet beheren.",
+          "alreadyMappedRemoveFirst": "{emojiArg} is al gekoppeld aan dat bericht. Verwijder het eerst met `{prefix}rr remove`.",
+          "done": "Reactierol-koppeling gewijzigd: {emojiArg} -> verwijder **{removeRoleName}**, voeg **{addRoleName}** toe op dat bericht."
+        },
+        "addmulti": {
+          "usage": "Gebruik: `{prefix}rr addmulti <#kanaal> <berichtId> <emoji> <@role1> <@role2> ...`\nWijs **meerdere rollen** toe met één reactie (minimaal 2 rollen, max 10).",
+          "maxRoles": "Maximaal 10 rollen per emoji.",
+          "invalidRole": "Ongeldige rol: `{roleArg}`. Vermeld een rol, geef het ID op of typ de naam van de rol.",
+          "duplicateRole": "Dubbele rol: <@&{roleId}>.",
+          "roleNotFound": "Rol niet gevonden: `{roleId}`. Zorg ervoor dat de rol bestaat en dat de bot deze kan zien.",
+          "alreadyMappedRemoveFirst": "{emojiArg} is al gekoppeld aan dat bericht. Verwijder deze eerst met `{prefix}rr remove`.",
+          "done": "Klaar! {emojiArg} is nu gekoppeld aan **{roleCount} rollen**: {roleList}."
+        }
+      },
+      "slowmodeperms": {
+        "usage": "**Slowmode-permissies**\nSta specifieke rollen toe om `{prefix}slowmode` te gebruiken zonder dat ze Kanalen beheren nodig hebben.\n\n`{prefix}slowmodeperms add <@rol` - sta een rol toe om slowmode te gebruiken\n`{prefix}slowmodeperms remove <@rol` - verwijder een rol uit de toegestane lijst\n`{prefix}slowmodeperms list` - toon toegestane rollen\n`{prefix}slowmodeperms clear` - wis alles (alleen gebruikers met Kanalen beheren kunnen dan slowmode gebruiken)",
+        "roleRequiredUsageAdd": "Geef een rol op. Gebruik: `{prefix}slowmodeperms add <@rol`",
+        "roleRequiredUsageRemove": "Gelieve een rol op te geven. Gebruik: `{prefix}slowmodeperms remove <@rol`",
+        "invalidRole": "Ongeldige rol. Gebruik een rolvermelding of rol-ID.",
+        "alreadyAllowed": "**{roleName}** staat al op de slowmode-toestaanlijst.",
+        "added": "**{roleName}** toegevoegd aan de slowmode-toegangslijst. Leden met deze rol kunnen `{prefix}slowmode` gebruiken zonder de Kanalen beheren-permissie.",
+        "removed": "<@&{roleId}> verwijderd van de slowmode-allowlist.",
+        "noteAllowlistEmpty": "De allowlist is nu leeg - alleen gebruikers met Kanalen beheren kunnen slowmode gebruiken.",
+        "noAllowOverrides": "Geen slowmode-rol-overrides ingesteld. Alleen gebruikers met de Kanalen beheren-permissie kunnen `{prefix}slowmode` gebruiken.",
+        "notInAllowlist": "Die rol staat niet op de slowmode-allowlist.",
+        "list": "**Toegestane rollen voor Slowmode:**\n{roleList}\n\nLeden met een van deze rollen kunnen `{prefix}slowmode` gebruiken zonder de Kanalen beheren-permissie.",
+        "noOverridesToClear": "Geen slowmode-rolafwijkingen die gewist moeten worden.",
+        "clearedAll": "Alle slowmode-roloverschrijvingen gewist. Alleen gebruikers met de Kanalen beheren-permissie kunnen `{prefix}slowmode` gebruiken.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het beheren van slowmode-permissies."
+        }
+      },
+      "commandperms": {
+        "usage": "**Commandopermissies**\nBeperk het gebruik van botcommando's tot specifieke rollen. Als dit is ingesteld, kunnen alleen leden met een toegestane rol (of staff/admins) niet-admin commando's gebruiken.\n\n`{prefix}commandperms add <@rol` - sta een rol toe om commando's te gebruiken\n`{prefix}commandperms remove <@rol` - verwijder een rol van de toegestane lijst\n`{prefix}commandperms list` - toon toegestane rollen\n`{prefix}commandperms clear` - alles wissen (iedereen kan commando's gebruiken)",
+        "roleRequiredUsageAdd": "Geef een rol op. Gebruik: `{prefix}commandperms add <@rol`",
+        "roleRequiredUsageRemove": "Geef een rol op. Gebruik: `{prefix}commandperms remove <@rol`",
+        "invalidRole": "Ongeldige rol. Gebruik een rolvermelding of rol-ID.",
+        "alreadyAllowed": "**{roleName}** staat al op de allowlist voor dit commando.",
+        "added": "**{roleName}** toegevoegd aan de commando-allowlist. Leden met deze rol kunnen botcommando's gebruiken.",
+        "notInAllowlist": "Die rol staat niet op de commando-allowlist.",
+        "removed": "<@&{roleId}> verwijderd van de commando-allowlist.",
+        "noteAllowlistEmpty": "De allowlist is nu leeg - iedereen kan weer commands gebruiken.",
+        "noRestrictions": "Er zijn geen commandorolbeperkingen ingesteld. Iedereen kan botcommando's gebruiken.",
+        "list": "**Toegestane commandorollen:**\n{roleList}\n\nAlleen leden met een van deze rollen (plus staff/admins) kunnen niet-admin commando's gebruiken.",
+        "noRestrictionsToClear": "Geen commandorolrestricties om te wissen.",
+        "clearedAll": "Alle commandobeperkingen voor rollen zijn verwijderd. Iedereen kan de botcommando's weer gebruiken.",
+        "errors": {
+          "generic": "Er is een fout opgetreden bij het beheren van commandopermissies."
+        }
+      },
+      "keywords": {
+        "statusEnabled": "**Ingeschakeld**",
+        "statusDisabled": "**Uitgeschakeld**",
+        "actionLine": "Actie: `{action}`",
+        "showListEmpty": "**Keyword-systeem** - {statusLine} | {actionLine}\n\nGeen keywords geconfigureerd. Gebruik `{prefix}keywords add <woord>` om er een toe te voegen.",
+        "showList": "**Keyword-systeem** - {statusLine} | {actionLine}\n\n{list}\n\n{usedCount}/{max} trefwoorden gebruikt.",
+        "setEnabledEnabled": "Waarschuwingssysteem voor trefwoorden **ingeschakeld**.",
+        "setEnabledDisabled": "Keyword-waarschuwingssysteem **uitgeschakeld**.",
+        "addUsage": "Gebruik:\n`{prefix}keywords add <word>` - exacte match\n`{prefix}keywords add regex <pattern>` - regex match",
+        "regexPatternRequired": "Geef een regex-patroon op na `regex`.",
+        "invalidRegexPattern": "Ongeldig regex-patroon: `{error}`",
+        "regexRejected": "Regex afgewezen: {reason} Vereenvoudig het of gebruik een gewoon trefwoord in plaats daarvan.",
+        "maxKeywordsReached": "Maximum van {max} keywords bereikt. Verwijder er eerst één.",
+        "duplicatePattern": "Dat patroon staat al in de lijst.",
+        "tagKeyword": "Trefwoord",
+        "tagRegexPattern": "regex-patroon",
+        "added": "{tag} toegevoegd: `{pattern}`\n\nVergeet niet `{prefix}keywords enable` te gebruiken als het systeem uitstaat.",
+        "removeInvalidNumber": "Geef een geldig nummer op (1–{max}). Gebruik `{prefix}keywords list` om de nummers te bekijken.",
+        "removed": "Trefwoord #{num} verwijderd: `{pattern}`",
+        "validActions": "Geldige acties: `warn`, `delete`, `delete+warn`",
+        "actionWarn": "Waarschuwing geven maar bericht laten staan.",
+        "actionDelete": "Bericht stilletjes verwijderen, geen waarschuwing.",
+        "actionDeleteWarn": "Bericht verwijderen en een waarschuwing geven.",
+        "actionSetDone": "Actie ingesteld op `{action}` - {description}",
+        "testMissingText": "Geef wat tekst op om te testen: `{prefix}keywords test <jouw tekst hier>`",
+        "noKeywordsConfigured": "Nog geen keywords geconfigureerd.",
+        "noKeywordsMatched": "Geen keywords gevonden: `{preview}`",
+        "testMatches": "**{hitsCount} trefwoord(en) gematcht:**\n{hits}",
+        "unknownSubcommand": "Onbekend subcommando. Gebruik `{prefix}keywords` om alle opties te zien."
+      },
+      "sticky": {
+        "title": "Stickyberichten",
+        "help": "**Sticky messages** blijven onderaan een kanaal staan. Elk nieuw bericht verwijdert de oude sticky en plaatst hem opnieuw.\n\n`{prefix}sticky add <#kanaal> [bericht]` - een kanaal instellen\n`{prefix}sticky message <#kanaal> <tekst>` - de sticky-tekst instellen\n`{prefix}sticky remove <#kanaal>` - een sticky verwijderen\n`{prefix}sticky on/off <#kanaal>` - in-/uitschakelen zonder de configuratie te verwijderen\n`{prefix}sticky list` - alle stickies tonen\n`{prefix}sticky test <#kanaal>` - de sticky nu eenmalig posten",
+        "listEmpty": "Geen sticky messages geconfigureerd. Gebruik `{prefix}sticky add <#kanaal> <bericht>`.",
+        "list": "**Sticky kanalen ({count}/{max}):**\n{lines}",
+        "channelRequired": "Geef een kanaal op: `{prefix}sticky {sub} <#kanaal>`",
+        "alreadyExists": "<#{channelId}> heeft al een sticky. Gebruik `{prefix}sticky message` om deze te bewerken.",
+        "maxReached": "Maximum van {max} sticky kanalen bereikt. Verwijder er eerst een.",
+        "messageTooLong": "Sticky message mag maximaal 2000 tekens lang zijn.",
+        "added": "Sticky message toegevoegd voor <#{channelId}>.",
+        "removed": "Sticky verwijderd uit <#{channelId}>.",
+        "notFound": "Geen sticky geconfigureerd voor <#{channelId}>.",
+        "notConfigured": "Geen sticky geconfigureerd voor <#{channelId}>. Gebruik `{prefix}sticky add <#kanaal> <bericht>`.",
+        "messageUsage": "Gebruik: `{prefix}sticky message <#kanaal> <tekst>`",
+        "messageSet": "Sticky message bijgewerkt voor <#{channelId}>.",
+        "needsMessage": "Stel eerst een bericht in: `{prefix}sticky message <#kanaal> <tekst>`",
+        "disabled": "Sticky uitgeschakeld in <#{channelId}>.",
+        "channelMissing": "Kanaal <#{channelId}> niet gevonden of niet toegankelijk.",
+        "testPosted": "Sticky-preview geplaatst in <#{channelId}>.",
+        "enabled": "Sticky ingeschakeld in <#{channelId}>.",
+        "error": "Er is iets misgegaan bij het bijwerken van de sticky-instellingen."
+      },
+      "customcommand": {
+        "actionUsage": "Gebruik: `!cc action <naam> <type> [rolId]`. Geldige types: {actions}",
+        "actionRoleRequired": "Rolacties vereisen een rol: `!cc action <naam> <type> <@rol of rol-ID>`",
+        "actionSet": "Actie van aangepast commando `{name}` ingesteld op `{actionType}`."
+      }
+    },
+    "botinfo": {
+      "title": "Botinformatie",
+      "unknown": "Onbekend",
+      "labelName": "Naam",
+      "labelId": "ID",
+      "labelVersion": "Versie",
+      "labelUptime": "Uptime",
+      "labelMemory": "Geheugen",
+      "labelServers": "Servers",
+      "labelNode": "Node.js",
+      "labelLibrary": "Bibliotheek",
+      "libraryName": "Fluxer.JS",
+      "uptimeFormat": "{days}d {hours}u {minutes}m {seconds}s",
+      "memoryFormat": "{usedMemory}MB / {totalMemory}MB",
+      "errorFetchFailed": "Er is een fout opgetreden bij het ophalen van de botinformatie."
+    },
+    "help": {
+      "errors": {
+        "commandNotFound": "Geen commando genaamd `{commandName}` gevonden. Gebruik `{prefix}help` om alle commando's te bekijken.",
+        "generic": "Er is een fout opgetreden bij het genereren van de help-informatie."
+      },
+      "menuTitle": "ClaudeCityMod - Help Menu",
+      "menuDescription": "Prefix: **`{prefix}`**\nGebruik `{prefix}help <command>` voor gedetailleerde info over een specifiek command.\n[Volledige Documentatie]({docsUrl}) • [Web Dashboard]({dashboardUrl})",
+      "menuFooter": "{prefix}help <commando> voor details • Dashboard: {dashboardUrl}",
+      "commandListHeader": "**ClaudeCityMod - Commandolijst** • Prefix: `{prefix}`"
+    },
+    "generic": {
+      "automodSuffixAlsoOff": "(Automod staat ook uit - gebruik `{prefix}toggle-automod` om het in te schakelen.)",
+      "automodSuffixLevelMinimal": "Automod-niveau ingesteld op `minimal` om het te activeren.",
+      "cannotManageRole": "Je kunt die rol niet beheren.",
+      "cannotManageRoleSpecific": "Je kunt de rol **{roleName}** niet beheren.",
+      "channelNotInGuild": "Dat kanaal bestaat niet op deze server.",
+      "handlerMissing": "Command handler niet beschikbaar.",
+      "invalidChannelInput": "Vermeld een geldig kanaal of geef een kanaal-ID op.",
+      "invalidRoleInput": "Vermeld een geldige rol of geef een rol-ID op.",
+      "invalidUserInput": "Vermeld een geldige gebruiker of geef een gebruikers-ID op.",
+      "jumpToMessageHyperlink": "Ga naar bericht",
+      "levelingDisabled": "Levelen is niet ingeschakeld op deze server. Beheerders: `{prefix}leveling enable` of het dashboard.",
+      "membersFetchFailed": "Kon serverleden niet ophalen.",
+      "noReasonProvided": "Geen reden opgegeven",
+      "noXpProfile": "Die gebruiker heeft geen XP-profiel op deze server.",
+      "roleNotFound": "Die rol bestaat niet op deze server.",
+      "serverOnly": "Dit commando kan alleen op een server worden gebruikt.",
+      "tooMuchXp": "Aantal moet tussen 1 en 100.000 liggen.",
+      "userNotInServer": "Die gebruiker zit niet op deze server.",
+      "yourMemberNotFound": "Kon je ledengegevens niet ophalen."
+    }
+  },
+  "auditCatalog": {
+    "api": {
+      "middleware": {
+        "auth": {
+          "missingOrInvalidAuthorization": "Ontbrekende of ongeldige autorisatie",
+          "invalidOrExpiredToken": "Ongeldig of verlopen token",
+          "ownerOnly": "Dit endpoint is uitsluitend toegankelijk voor de bot-eigenaar",
+          "missingGuildId": "Ontbrekende server-ID",
+          "guildAccessRequiresOauth": "Toegang tot server vereist Fluxer OAuth-authenticatie",
+          "verifyGuildAccessFailed": "Serververificatie mislukt",
+          "notGuildMember": "Je bent geen lid van deze guild",
+          "manageGuildPermissionRequired": "Je hebt de permissie Administrator of Server beheren nodig om deze server te beheren"
+        },
+        "rateLimit": {
+          "tooManyRequests": "Te veel verzoeken, probeer het later opnieuw.",
+          "tooManyAuthRequests": "Te veel authenticatieverzoeken, probeer het later opnieuw.",
+          "tooManyWriteRequests": "Te veel schrijfverzoeken, probeer het later opnieuw."
+        },
+        "settingsValidator": {
+          "mustBeObject": "{field} moet een object zijn",
+          "mustBeBoolean": "{field} moet een booleaanse waarde zijn",
+          "mustBeArray": "{field} moet een array zijn",
+          "mustBeString": "{field} moet een string zijn",
+          "mustBeValidLocaleCode": "{field} moet een geldige localecode zijn",
+          "mustBeValidChannelId": "{field} moet een geldig kanaal-ID zijn",
+          "mustBeValidRoleId": "{field} moet een geldig rol-ID zijn",
+          "mustBeValidWebhookId": "{field} moet een geldig webhook-ID zijn",
+          "mustBeValidMessageId": "{field} moet een geldig bericht-ID zijn",
+          "mustBeValidId": "{field} moet een geldige ID zijn",
+          "maxAllowed": "Maximaal {max} {label} toegestaan",
+          "customCommandsMaxAllowed": "Maximaal {max} aangepaste commando's",
+          "eachStringLengthRange": "Elke {label} moet een tekenreeks zijn van {min}-{max} tekens",
+          "mustBeRange": "{field} moet tussen {min} en {max} liggen",
+          "mustBeUnderCharacters": "{field} moet minder dan {max} tekens bevatten",
+          "mustBeArrayOfUpTo": "{field} moet een array van maximaal {max} {itemType} zijn",
+          "mustBeOneOf": "{field} moet {options} zijn",
+          "mustBeHttpUrl": "{field} moet een geldige http(s)-URL zijn",
+          "mustStartWithSlash": "{field} moet beginnen met / voor {context}",
+          "eachItemMustBeObject": "Elke {label} moet een object zijn",
+          "eachItemUnderCharacters": "Elke {label} moet minder dan {max} tekens bevatten",
+          "mustBeNonEmptyString": "{field} moet een niet-lege string zijn",
+          "mustBeNonEmptyStringUnder": "{field} moet een niet-lege string zijn van minder dan {max} tekens",
+          "mustBeValidHexColor": "{field} moet een geldige 6-cijferige hexadecimale kleur zijn",
+          "mustBeUnique": "{field} moet uniek zijn",
+          "customCommandNamesMustBeUnique": "Namen van aangepaste commando's moeten uniek zijn",
+          "isInvalid": "{field} is ongeldig",
+          "isRequiredForAction": "{field} is verplicht voor de {action}-actie",
+          "canContainAtMost": "{field} kan maximaal {max} {itemType} bevatten",
+          "keyTooLong": "{field} key te lang",
+          "customCommandNameInvalid": "Aangepaste commandonaam moet 1-32 tekens lang zijn en mag alleen a-z, 0-9, - of _ bevatten"
+        }
+      },
+      "routes": {
+        "auth": {
+          "oauthNotConfigured": "OAuth2 niet geconfigureerd",
+          "missingAuthorizationCode": "Autorisatiecode ontbreekt",
+          "invalidOrExpiredState": "Ongeldige of verlopen OAuth-status",
+          "tokenExchangeFailed": "Token-uitwisseling mislukt",
+          "tokenExchangeError": "Fout bij tokenuitwisseling",
+          "missingToken": "Ontbrekend token",
+          "invalidToken": "Ongeldig token"
+        },
+        "data": {
+          "notAuthenticated": "Niet geauthenticeerd",
+          "collectFailed": "Gebruikersgegevens verzamelen mislukt",
+          "deleteFailed": "Verwijderen van gebruikersgegevens mislukt"
+        },
+        "guilds": {
+          "guildListingRequiresOauth": "Voor het weergeven van serverlijsten is Fluxer OAuth-authenticatie vereist",
+          "fetchUserGuildsFailed": "Ophalen van gebruikersservers via Fluxer mislukt",
+          "guildNotFound": "Server niet gevonden. Zorg dat de bot in de server zit en niet is rate-limited.",
+          "noValidFieldsToUpdate": "Geen geldige velden om bij te werken",
+          "validationFailed": "Validatie mislukt",
+          "validationErrorUpdating": "Validatiefout bij het bijwerken van {fields}",
+          "updateSettingsFailed": "Bijwerken van instellingen mislukt",
+          "createTicketCategoryFailed": "Aanmaken van ticketcategorie mislukt",
+          "specifiedChannelNotFound": "Opgegeven kanaal niet gevonden",
+          "ticketSetupTopic": "Reageer op het bericht hieronder om een supportticket aan te maken!",
+          "createTicketChannelFailed": "Aanmaken van ticketkanaal mislukt",
+          "postTicketPanelMessageFailed": "Versturen van ticketpaneelbericht mislukt",
+          "ticketSetupFailed": "Instellen van ticketpaneel mislukt: {error}",
+          "createVerificationCategoryFailed": "Categorie aanmaken mislukt: {error}",
+          "verificationSetupTopic": "Reageer met ✅ om het verificatieproces te starten.",
+          "createVerificationChannelFailed": "Verificatiekanaal aanmaken mislukt: {error}",
+          "verificationSetupFailed": "Verificatie instellen is mislukt: {error}",
+          "channelIdRequired": "channelId is verplicht",
+          "reactionRolesDefaultTitle": "Reactierollen",
+          "reactionRolesDefaultDescription": "Reageer hieronder om een rol te krijgen.",
+          "postReactionRolePanelFailed": "Plaatsen van paneelbericht mislukt",
+          "createReactionRolePanelFailed": "Aanmaken van paneel mislukt",
+          "emojiAndRoleIdRequired": "Emoji en roleId zijn verplicht",
+          "guildSettingsNotFound": "Serverinstellingen niet gevonden",
+          "reactionRolePanelNotFound": "Paneel niet gevonden",
+          "reactionRolePanelMaxMappings": "Paneel heeft al het maximum van 20 koppelingen",
+          "reactionRoleEmojiAlreadyMapped": "Deze emoji is al gekoppeld aan dit paneel",
+          "addReactionFailed": "Kon reactie niet toevoegen: {error}",
+          "invalidEmoji": "Ongeldige emoji",
+          "addReactionRoleMappingFailed": "Toevoegen van koppeling mislukt",
+          "editReactionRolePanelFailed": "Bewerken van paneel mislukt",
+          "invalidImageData": "Ongeldige afbeeldingsgegevens. Moet een base64-data-URL zijn.",
+          "unsupportedImageFormat": "Niet-ondersteund afbeeldingsformaat. Gebruik PNG, JPEG of WebP.",
+          "imageTooLarge": "Afbeelding te groot (max. 4MB).",
+          "invalidGuildIdFormat": "Ongeldig formaat voor server-ID",
+          "ticketNotFound": "Ticket niet gevonden",
+          "ticketAlreadyClaimedBy": "Al geclaimd door {userId}",
+          "ticketClaimedTitle": "Ticket #{ticketNumber} - Geclaimd",
+          "ticketClaimedDescription": "<@{userId}> heeft dit ticket geclaimd via het dashboard.",
+          "openTicketNotFound": "Open ticket niet gevonden",
+          "ticketClosedFromDashboard": "Gesloten via dashboard",
+          "rssUrlRequired": "url is verplicht voor rss sourceType",
+          "rsshubRouteRequired": "route is verplicht voor sourceType rsshub",
+          "fetchFeedFailed": "Ophalen van feed mislukt",
+          "l856_setDescription": "Gesloten door <@${req.userId}> via dashboard",
+          "l855_setTitle": "Ticket #${(ticket as any).ticketNumber} - Gesloten",
+          "l886_addFields_value": "<@${req.userId}> (dashboard)",
+          "l882_setTitle": "Ticket #${(ticket as any).ticketNumber} Gesloten",
+          "l959_setDescription": "Je ticket in **${guild?.name || req.params.id}** is gesloten door <@${req.userId}> via het dashboard.",
+          "l958_setTitle": "Ticket #${(ticket as any).ticketNumber} - Gesloten"
+        },
+        "health": {
+          "unknown": "Onbekend"
+        },
+        "moderation": {
+          "invalidCaseNumber": "Ongeldig zaaknummer",
+          "caseNotFound": "Case niet gevonden"
+        },
+        "stats": {
+          "unknownGuild": "Onbekend ({guildId})"
+        }
+      },
+      "server": {
+        "dashboardNotBuilt": "Dashboard niet gebouwd. Voer `npm run build` uit in /dashboard."
+      },
+      "errors": {
+        "generic": "Er is een fout opgetreden",
+        "internalServer": "Interne serverfout"
+      }
+    },
+    "automod": {
+      "modules": {
+        "antiLink": {
+          "l57_send_content": "Geen externe links toegestaan hier, <@${message.author.id}>!",
+          "logTitle": "Link verwijderd",
+          "logDescription": "Een bericht met externe links is verwijderd.",
+          "fieldLinks": "Links"
+        },
+        "antiRaid": {
+          "l224_send_content": "⚠️ Gecoördineerde spam gedetecteerd en verwijderd.",
+          "logTitle": "Gecoördineerde spam/raid gedetecteerd",
+          "logDescription": "**{userCount}** gebruikers hebben binnen een kort tijdsbestek bijna identieke berichten gestuurd. Alle overeenkomende berichten zijn verwijderd.",
+          "fieldNormalizedContent": "Genormaliseerde inhoud",
+          "emptyAfterNormalization": "(leeg na normalisatie)",
+          "fieldUsersInvolved": "Betrokken gebruikers ({userCount})",
+          "usersMoreSuffix": "...+{moreCount} meer",
+          "fieldMessagesDeleted": "Berichten verwijderd",
+          "fieldChannelsAffected": "Betrokken kanalen"
+        },
+        "antiReactionSpam": {
+          "timeoutReason": "Automod: Reactiespam",
+          "noticeTimedOut": "<@{userId}> is voor **{duration}** in timeout gezet vanwege reactiespam.",
+          "noticeFinalWarning": "Stop met reacties spammen, <@{userId}>! **Laatste waarschuwing** - de volgende overtreding leidt tot een **{duration}** timeout.",
+          "noticeViolation": "Stop met het spammen van reacties, <@{userId}>! (**{count}/{threshold}** overtredingen)",
+          "fieldViolations": "Overtredingen",
+          "fieldAction": "Actie",
+          "actionTimedOutFor": "Tijdelijk uitgesloten voor {duration}",
+          "logTitleTimedOut": "Reactiespam - Automatische time-out",
+          "logTitleDetected": "Reactiespam gedetecteerd",
+          "logDescriptionTimedOut": "Een gebruiker heeft een time-out gekregen wegens reactie-spam.",
+          "logDescriptionDetected": "Een gebruiker heeft een waarschuwing gekregen voor het spammen van reacties."
+        },
+        "antiSpam": {
+          "timeoutReason": "Automod: Herhaalde spamovertredingen",
+          "noticeTimedOut": "<@{userId}> heeft een time-out van **{duration}** gekregen wegens herhaalde spamovertredingen.",
+          "noticeFinalWarning": "Stop met spammen, <@{userId}>! **Laatste waarschuwing** - de volgende overtreding resulteert in een **{duration}** timeout.",
+          "noticeViolation": "Stop met spammen, <@{userId}>! (**{count}/{threshold}** overtredingen)",
+          "fieldMessagesDeleted": "Berichten verwijderd",
+          "fieldViolations": "Overtredingen",
+          "fieldAction": "Actie",
+          "actionTimedOutFor": "Time-out gekregen voor {duration}",
+          "logTitleTimedOut": "Spam - Automatische Time-out",
+          "logTitleDetected": "Spam gedetecteerd",
+          "logDescriptionTimedOut": "Een gebruiker heeft een time-out gekregen wegens herhaalde spamovertredingen.",
+          "logDescriptionDetected": "Spamberichten zijn verwijderd."
+        },
+        "ghostPing": {
+          "alertMessage": "**Ghost ping gedetecteerd!**\n**Afzender:** <@{authorId}>\n**Vermeld:** {mentions}",
+          "logTitle": "Ghost ping gedetecteerd",
+          "logDescription": "Een bericht met vermeldingen is verwijderd.",
+          "fieldSender": "Afzender",
+          "fieldMentioned": "Vermeld",
+          "fieldMessageContent": "Berichtinhoud",
+          "noContent": "*Geen inhoud*"
+        },
+        "honeypot": {
+          "reason": "Honeypot geactiveerd",
+          "logTitle": "Honeypot geactiveerd - {username}",
+          "logDescription": "<@{userId}> heeft een bericht gestuurd in een honeypotkanaal en is bestraft.",
+          "fieldAction": "Actie",
+          "footerUserId": "Gebruikers-ID: {userId}",
+          "actionBan": "Verbannen (verwijder {days}d aan berichten)",
+          "actionKick": "Schoppen",
+          "actionTimeout": "Timeout {hours}u",
+          "actionRole": "Rol <@&{roleId}>",
+          "actionRoleUnconfigured": "Rol (niet geconfigureerd)"
+        },
+        "keywordWarning": {
+          "l75_send": "Je hebt een waarschuwing gekregen in **${guild.name}**.\n**Reden:** ${reason}\n**Totaal aantal waarschuwingen:** ${warningCount}"
+        }
+      }
+    },
+    "commands": {
+      "admin": {
+        "customcommand": {
+          "l35_reply": "Gebruik: `!customcommand add <naam> <reactie>`\nVoorbeeld: `!customcommand add invite Word lid van onze server: https://fluxer.app/invite/abc`",
+          "l41_reply": "Commandnamen moeten 1–32 tekens lang zijn en mogen alleen alfanumerieke tekens, koppeltekens of underscores bevatten.",
+          "l45_reply": "`${name}` is een ingebouwd commando en kan niet worden gebruikt als naam voor een custom command.",
+          "l50_reply": "Geef een reactiebericht op.\nGebruik: `!customcommand add <naam> <reactie>`",
+          "l54_reply": "Antwoord is te lang (${response.length}/${MAX_RESPONSE_LENGTH} tekens).",
+          "l59_reply": "Een aangepast commando `!${name}` bestaat al. Gebruik `!customcommand edit ${name} <nieuwe reactie>` om het te wijzigen, of verwijder het eerst met `!customcommand remove ${name}`.",
+          "l63_reply": "Je hebt het maximum van ${MAX_COMMANDS} custom commands bereikt. Verwijder er eerst een.",
+          "l85_reply": "Aangepaste opdracht `!${name}` aangemaakt.",
+          "l90_reply": "Gebruik: `!customcommand remove <naam>`",
+          "l102_reply": "Aangepast commando `!${name}` verwijderd.",
+          "l107_reply": "Gebruik: `!customcommand edit <naam> <nieuwe reactie>`",
+          "l110_reply": "Geef de nieuwe reactie op.\nGebruik: `!customcommand edit <naam> <nieuwe reactie>`",
+          "l113_reply": "Antwoord is te lang (${response.length}/${MAX_RESPONSE_LENGTH} tekens).",
+          "l126_reply": "Aangepast commando `!${name}` bijgewerkt.",
+          "l135_reply": "Gebruik: `!customcommand embed <naam> <on|off> [color] [title]`\nVoorbeeld: `!customcommand embed invite on #5865F2 Server Invite`",
+          "l164_reply": "`!${name}` verstuurt nu als embed.",
+          "l165_reply": "Kleur: `${cmd.color}`",
+          "l166_reply": "Titel: **${cmd.title}**",
+          "l169_reply": "`!${name}` wordt nu als een gewoon bericht verzonden.",
+          "l175_reply": "Geen aangepaste commando's geconfigureerd. Gebruik `!customcommand add <naam> <antwoord>` om er een te maken.",
+          "l180_reply": "embed",
+          "l188_setFooter": "${commands.length}/${MAX_COMMANDS} commando's",
+          "l185_setTitle": "Aangepaste Commando's - ${guild.name}",
+          "l195_reply": "Gebruik: `!customcommand info <naam>`",
+          "l206_addFields_name": "Antwoord",
+          "l207_addFields_name": "Embedmodus",
+          "l203_setTitle": "Aangepast commando: !${cmd.name}",
+          "l211_addFields_name": "Titel",
+          "l230_setFooter": "Gebruik \\n in antwoorden voor regeleinden. Max 5 commando's, 2000 tekens elk.",
+          "l223_addFields_name": "!customcommand add <naam> <antwoord>",
+          "l223_addFields_value": "Maak een nieuw aangepast commando aan",
+          "l224_addFields_name": "!customcommand remove <naam>",
+          "l224_addFields_value": "Verwijder een aangepast commando",
+          "l225_addFields_name": "!customcommand edit <naam> <nieuw antwoord>",
+          "l225_addFields_value": "Wijzig de reactie van een bestaande command",
+          "l226_addFields_name": "!customcommand embed <naam> <on|off> [kleur] [titel]",
+          "l226_addFields_value": "Wissel embedmodus voor een commando",
+          "l227_addFields_name": "!customcommand list",
+          "l227_addFields_value": "Alle custom commands weergeven",
+          "l228_addFields_name": "!customcommand info <naam>",
+          "l228_addFields_value": "Toon details van een specifiek commando",
+          "l221_setDescription": "Maak aangepaste commando's waarop de bot reageert met een ingesteld bericht.",
+          "l219_setTitle": "Aangepaste commando's",
+          "l265_reply": "Er is een fout opgetreden bij het verwerken van het aangepaste commando.",
+          "commandNotFoundError": "Geen custom command `!${name}` gevonden."
+        },
+        "globalban": {
+          "l53_reply": "Er is een fout opgetreden bij het bijwerken van de instelling.",
+          "l69_reply": "Kon de huidige instelling niet ophalen.",
+          "l80_reply": "Auto-apply staat op **${autoApply ? 'on' : 'off'}**. Gebruik `${prefix}globalban autoban on` of `${prefix}globalban autoban off` om dit te wijzigen.",
+          "l83_reply": "Kon de huidige instelling niet ophalen.",
+          "l89_reply": "Schakel eerst globale banbescherming in met `globalban on`.",
+          "l105_reply": "Er is een fout opgetreden bij het bijwerken van de instelling.",
+          "l114_reply": "Geen globale bans geconfigureerd.",
+          "l127_reply_content": "Globale banlijst (**${bans.length}** items).",
+          "l135_setTitle": "Globale ban",
+          "l302_setFooter": "Reageer hierboven om te beslissen • Alleen server-admins kunnen reageren",
+          "l289_setTitle": "Nieuwe Global Ban – Jouw Beslissing",
+          "l361_setFooter": "Configureer een logkanaal met setlog om meldingen in-server te ontvangen",
+          "l350_setTitle": "Nieuwe globale ban (geen logkanaal)",
+          "l383_reply": "Gebruik: `${prefix}globalban remove <gebruikersId>`",
+          "l391_setTitle": "Globale unban",
+          "l413_setDescription": "**${unbanned}** unban(s) toegepast op ${guildIds.length} servers.",
+          "l412_setTitle": "Wereldwijde unban voltooid",
+          "l422_reply": "Gebruik: `${prefix}globalban check <gebruikersId>`",
+          "l427_reply": "Gebruiker `${userId}` staat **niet** op de globale banlijst.",
+          "l437_addFields_name": "Verbannen",
+          "l432_setTitle": "Globale ban gevonden",
+          "l450_setTitle": "Global Ban-commando's",
+          "l480_reply": "Geen geldige user-ID's gevonden. Scheid ID's met komma's (geen spaties in de ID-lijst).",
+          "l483_reply": "Maximum van 100 ID's per massaban.",
+          "l489_setDescription": "**${userIds.length}** gebruikers worden toegevoegd aan de globale banlijst, gebanned, en recente berichten worden verwijderd in servers die zich hebben aangemeld...",
+          "l488_setTitle": "Massale globale ban",
+          "l521_setTitle": "Globale massaverbanning voltooid",
+          "l546_setDescription": "<@${userId}> (`${userId}`) staat al op de banlijst. Deelnemende servers worden opnieuw gescand en recente berichten worden verwijderd...",
+          "l545_setTitle": "Globale Ban Herscan",
+          "l560_setDescription": "**${banned}** ban(s) toegepast op **${serversChecked}** deelnemende server(s).\n**${deleted}** recent bericht(en) verwijderd.",
+          "l559_setTitle": "Herscan voltooid",
+          "l568_setTitle": "Wereldwijde ban toegevoegd",
+          "l599_setTitle": "Meldingen verzonden"
+        },
+        "goodbye": {
+          "l51_setFooter": "Gebruik !goodbye test om een voorbeeld te bekijken",
+          "l44_addFields_name": "Embed",
+          "l36_setTitle": "Afscheidsconfiguratie",
+          "l58_embedReply_description": "Gebruik: `${prefix}goodbye channel <#kanaal>` of `${prefix}goodbye channel clear`",
+          "l66_embedReply_description": "Afscheidskanaal gewist en afscheidsberichten uitgeschakeld.",
+          "l75_embedReply_description": "Afscheidskanaal ingesteld op <#${channelId}> en afscheidsberichten **ingeschakeld**.",
+          "l80_embedReply_description": "Stel eerst een afscheidskanaal in: `${prefix}goodbye channel <#kanaal>`",
+          "l83_embedReply_description": "Afscheidsberichten **ingeschakeld**.",
+          "l89_embedReply_description": "Afscheidsberichten **uitgeschakeld**.",
+          "l94_embedReply_description": "Gebruik: `${prefix}goodbye message <tekst>` of `${prefix}goodbye message clear`\nVariabelen: `{user}` `{username}` `{server}` `{count}`",
+          "l101_embedReply_description": "Aangepaste afscheidstekst gewist. Standaardbericht wordt gebruikt.",
+          "l104_embedReply_description": "Afscheidsbericht is te lang (max 500 tekens).",
+          "l108_embedReply_description": "Afscheidstekst ingesteld op:\n>>> ${val}",
+          "l120_embedReply_description": "Afscheidsembed **ingeschakeld**.",
+          "l126_embedReply_description": "Afscheidsbericht (embed) **uitgeschakeld**.",
+          "l131_embedReply_description": "Gebruik: `${prefix}goodbye embed title <tekst>` of `${prefix}goodbye embed title clear`",
+          "l135_embedReply_description": "Embed-titel gewist.",
+          "l137_embedReply_description": "Embedtitel is te lang (max. 256 tekens).",
+          "l140_embedReply_description": "Embedtitel ingesteld op: **${val}**",
+          "l145_embedReply_description": "Gebruik: `${prefix}goodbye embed description <tekst>` of `${prefix}goodbye embed description clear`",
+          "l149_embedReply_description": "Embed-beschrijving gewist.",
+          "l151_embedReply_description": "Embed-beschrijving is te lang (max. 2048 tekens).",
+          "l154_embedReply_description": "Embedbeschrijving ingesteld.",
+          "l159_embedReply_description": "Geef een geldige hexkleur op. Voorbeeld: `${prefix}goodbye embed color #ff0000`",
+          "l162_embedReply_description": "Embedkleur ingesteld op **${hex}**.",
+          "l167_embedReply_description": "Gebruik: `${prefix}goodbye embed footer <tekst>` of `${prefix}goodbye embed footer clear`",
+          "l171_embedReply_description": "Embed-footer verwijderd.",
+          "l173_embedReply_description": "Embed-footer is te lang (max. 2048 tekens).",
+          "l176_embedReply_description": "Embed-footer ingesteld op: ${val}",
+          "l186_embedReply_title": "Afscheidsembed-opties",
+          "l193_embedReply_description": "Afscheidsberichten zijn nog niet geconfigureerd. Gebruik `${prefix}goodbye channel <#kanaal>` om te beginnen.",
+          "l242_embedReply_title": "Afscheidssysteem",
+          "l285_embedReply_description": "Er is een fout opgetreden bij het bijwerken van de afscheidsinstellingen."
+        },
+        "honeypot": {
+          "l79_reply": "**Honeypot-kanalen** (${honeypots.length}/${MAX_HONEYPOTS})\n\n${lines}${footer}",
+          "l85_reply": "Usage: `${prefix}honeypot info <#kanaal>`",
+          "l131_reply": "Ongeldige actie. Kies uit: `ban`, `kick`, `timeout`, `role`.",
+          "l138_reply": "Timeout vereist een duur: `${prefix}honeypot add <#kanaal> timeout <uren>` (1–672 uur).",
+          "l144_reply": "Rolactie vereist een rol: `${prefix}honeypot add <#kanaal> role <@rol>`.",
+          "l164_reply": "Verwijderdagen moeten tussen 0 en 7 liggen.",
+          "l182_reply": "Maximum van ${MAX_HONEYPOTS} honeypotkanalen bereikt. Verwijder er eerst een.",
+          "l198_reply": "<#${channel.id}> honeypot ${existing ? 'bijgewerkt' : 'aangemaakt'} - ${formattedEntry}.",
+          "l206_reply": "Usage: `${prefix}honeypot remove <#kanaal>`",
+          "l225_reply": "Honeypot verwijderd uit <#${channel.id}>.",
+          "l231_reply": "Gebruik: `${prefix}honeypot ${enabled ? 'enable' : 'disable'} <#kanaal>`",
+          "l258_reply": "Gebruik: `${prefix}honeypot alertrole <@rol>` of `${prefix}honeypot alertrole clear`",
+          "l267_reply": "Honeypot-alertrol gewist.",
+          "l271_reply": "Vermeld een rol of geef een rol-ID op.",
+          "l283_reply": "Honeypot-alertrol ingesteld op <@&${roleId}>. Deze rol wordt gepingd in de mod log wanneer een honeypot afgaat.",
+          "l324_reply": "Onbekend subcommando. Gebruik `${prefix}honeypot` om alle opties te bekijken.",
+          "unconfiguredError": "<#${channel.id}> is niet ingesteld als honeypot.",
+          "unconfiguredErrorWithSuggestion": "<#${channel.id}> is niet geconfigureerd als honeypot. Gebruik eerst `${prefix}honeypot add`."
+        },
+        "lockdown": {
+          "l34_reply": "Alleen **Beheerders** of de servereigenaar kunnen de lockdownconfiguratie wijzigen.",
+          "l40_reply": "Vermeld een rol of gebruiker. Voorbeeld: `${prefix}lockdown config ${action} @Role`",
+          "l48_reply": "Vermeld een geldige rol. Voorbeeld: `${prefix}lockdown config addrole @Member`",
+          "l50_reply": "De @everyone-rol wordt standaard altijd bij lockdown inbegrepen.",
+          "l51_reply": "Die rol staat al in de lockdown-lijst met doelwitten.",
+          "l55_reply": "<@&${roleId}> toegevoegd aan lockdown-doelrollen. Deze rol wordt nu samen met @everyone vergrendeld.",
+          "l58_reply": "Vermeld een geldige rol. Voorbeeld: `${prefix}lockdown config removerole @Member`",
+          "l61_reply": "Die rol staat niet in de lockdown-doellijst.",
+          "l65_reply": "<@&${roleId}> verwijderd uit lockdown-doelrollen.",
+          "l70_reply": "Die rol heeft al lockdown-permissie.",
+          "l74_reply": "<@&${roleId}> kan nu het `${prefix}lockdown` commando gebruiken.",
+          "l78_reply": "Deze gebruiker heeft al lockdown-permissie.",
+          "l82_reply": "<@${userId}> kan het commando `${prefix}lockdown` nu gebruiken.",
+          "l84_reply": "Vermeld een rol of gebruiker. Voorbeeld: `${prefix}lockdown config allow @Moderator`",
+          "l90_reply": "Die rol heeft geen lockdown-permissie.",
+          "l94_reply": "<@&${roleId}> kan het `${prefix}lockdown` commando niet meer gebruiken.",
+          "l99_reply": "Die gebruiker heeft geen lockdown-permissie.",
+          "l103_reply": "<@${userId}> kan het commando `${prefix}lockdown` niet meer gebruiken.",
+          "l105_reply": "Vermeld een rol of gebruiker. Voorbeeld: `${prefix}lockdown config deny @Moderator`",
+          "l136_addFields_name": "Vergrendelde rollen tijdens lockdown",
+          "l136_addFields_value": "@everyone + ${targetRoles}",
+          "l137_addFields_name": "Toegestane rollen",
+          "l138_addFields_name": "Toegestane gebruikers",
+          "l133_setTitle": "Lockdownconfiguratie",
+          "l198_reply": "**${textChannels.length}** tekstkanaal/kanalen aan het vergrendelen voor ${roleLabel}... Dit kan even duren.",
+          "l256_edit": "Vergrendelen... ${overwriteCount} overwrites toegepast (${locked} vergrendeld, ${failed} mislukt)",
+          "l294_addFields_name": "Toegepaste overschrijvingen",
+          "l295_addFields_name": "Mislukt",
+          "l296_addFields_name": "Vergrendeld door",
+          "l297_addFields_name": "Uitnodigingen",
+          "l298_addFields_name": "Rollen vergrendeld",
+          "l286_setTitle": "Serverlockdown geactiveerd",
+          "l327_reply": "Bezig met ontgrendelen van **${state.channelSnapshots.length}** overwrite(s)... Dit kan even duren.",
+          "l411_addFields_name": "Overwrites hersteld",
+          "l412_addFields_name": "Mislukt",
+          "l413_addFields_name": "Ontgrendeld door",
+          "l403_setTitle": "Serverlockdown opgeheven",
+          "l428_reply": "Ongeldig server-ID. Geef een geldig numeriek server-ID op.",
+          "l433_reply": "Server `${targetGuildId}` is al in lockdown.",
+          "l441_reply": "Kon server `${targetGuildId}` niet vinden. Zorg ervoor dat de bot nog in die server zit.",
+          "l447_reply": "Bezig met vergrendelen van **${guild.name}** (`${guild.id}`)...",
+          "l465_reply": "Ongeldig server-ID. Voer een geldig numeriek server-ID in.",
+          "l470_reply": "Server `${targetGuildId}` heeft geen actieve lockdown.",
+          "l478_reply": "Kon server `${targetGuildId}` niet vinden. Zorg ervoor dat de bot nog in die server zit.",
+          "l484_reply": "Kanalen van **${guild.name}** (`${guild.id}`) worden ontgrendeld...",
+          "l560_reply": "Je hebt de **Administrator**-permissie of een geautoriseerde lockdown-rol nodig om dit commando te gebruiken.",
+          "l584_reply": "Er is een fout opgetreden bij het uitvoeren van het lockdown-commando.",
+          "connectivityError": "De Fluxer API ondervindt verbindingsproblemen. Probeer het straks opnieuw.",
+          "genericError": "Er is een fout opgetreden: `${errorMessage}`"
+        },
+        "rss": {
+          "l157_reply": "Dit RSS-subcommando is voorbehouden aan de bot-eigenaar.",
+          "l187_addFields_name": "Commandos",
+          "l192_addFields_name": "Bronformaat",
+          "l201_addFields_name": "Voorbeelden",
+          "l212_addFields_name": "Probleemoplossing",
+          "l178_setTitle": "RSS-installatie & RSSHub-gids",
+          "l241_reply": "Je kunt maximaal ${config.rss.maxFeedsPerGuild} feeds per server configureren.",
+          "l246_reply": "Ongeldige bron. Gebruik een http(s)-URL of een RSSHub-route die begint met /.",
+          "l266_reply": "Feed is bereikbaar, maar er zijn geen items gevonden.",
+          "l309_setDescription": "Polling: elke ${rss.pollIntervalMinutes} minuut(en) • RSS ${rss.enabled ? 'enabled' : 'disabled'}",
+          "l308_setTitle": "Ingestelde RSS-feeds",
+          "l326_reply": "Gebruik: ${prefix}rss remove <index|feedId>",
+          "l336_reply": "Feed `${removed.id}` verwijderd.",
+          "l341_reply": "Gebruik: ${prefix}rss ${sub} <index|feedId>",
+          "l348_reply": "${sub === 'resume' ? 'Feed hervat' : 'Feed gepauzeerd'}: `${found.feed.id}`.",
+          "l354_reply": "Huidig poll-interval is ${rss.pollIntervalMinutes} minuten.\nGebruik: ${prefix}rss interval <minutes>",
+          "l359_reply": "Interval moet een getal zijn.",
+          "l367_reply": "RSS pollinterval ingesteld op ${clamped} minuut/minuten.",
+          "l373_reply": "Gebruik: ${prefix}rss test <index|feedId|url|/rsshub/route>",
+          "l390_reply": "Kon de feedbron niet herleiden uit je invoer.",
+          "l414_addFields_name": "Opgeloste URL",
+          "l419_addFields_name": "Totaal aantal geparste items",
+          "l441_setDescription": "Pollinterval: ${rss.pollIntervalMinutes} minuut/minuten",
+          "l440_setTitle": "RSS-feedstatus",
+          "l490_setTitle": "RSS Debug (Alleen eigenaar)",
+          "l527_addFields_name": "Notitie",
+          "l528_addFields_value": "${visibleFeeds.length}/${feeds.length} feeds worden getoond om binnen de Discord embed-limieten te blijven.",
+          "l549_reply": "RSS-poller is momenteel actief. Wacht een paar seconden en probeer het opnieuw.",
+          "l552_reply": "RSS is uitgeschakeld voor deze server, dus force-poll is niet beschikbaar.",
+          "l558_reply": "Feed niet gevonden in deze guild.",
+          "l561_reply": "Geen geschikte feeds om te pollen (feeds kunnen gepauzeerd zijn of geen kanaal-ID hebben).",
+          "l591_reply": "Onbekend subcommando. Gebruik ${prefix}rss help.",
+          "l599_reply": "RSS-commando mislukt: ${error.message || 'onbekende fout'}",
+          "feedNotFoundError": "Feed niet gevonden. Gebruik rss list om indexen en ID's te controleren.",
+          "unconfiguredError": "Geen RSS-feeds geconfigureerd. Gebruik ${prefix}rss add om er een aan te maken.",
+          "addUsage": "Gebruik: ${prefix}rss add <#kanaal> <url|/rsshub/route> [@rol]"
+        },
+        "starboard": {
+          "l95_addFields_value": "sb",
+          "l96_addFields_value": "3s",
+          "l139_reply": "Je kunt maximaal 3 starboards hebben. Verwijder er een voordat je een nieuwe toevoegt.",
+          "l479_addFields_name": "Borden",
+          "l535_setFooter": "${starEmoji} Handmatig toegevoegd | ID: ${targetMessageId}",
+          "l531_addFields_name": "Bron",
+          "channelPrompt": "Geef aan welk starboard-kanaal je wilt bijwerken."
+        },
+        "status": {
+          "l45_addFields_value": "Status: ${automodStatus}"
+        },
+        "welcome": {
+          "channelNotFound": "Kanaal ophalen voor commando is mislukt.",
+          "l81_setFooter": "Gebruik !welcome test om een voorbeeld te bekijken",
+          "l63_addFields_name": "Kaart",
+          "l71_addFields_name": "Embed",
+          "l76_addFields_name": "DM",
+          "l77_addFields_value": "${dm.enabled ? 'Ingeschakeld' : 'Uitgeschakeld'} | Afbeelding: ${dm.imageEnabled ? 'Ja' : 'Nee'}",
+          "l54_setTitle": "Welkomstconfiguratie",
+          "l88_embedReply_description": "Gebruik: `${prefix}welcome channel <#kanaal>` of `${prefix}welcome channel clear`",
+          "l96_embedReply_description": "Welkomstkanaal gewist en welkomstberichten uitgeschakeld.",
+          "l105_embedReply_description": "Welkomstkanaal ingesteld op <#${channelId}> en welkomstberichten **ingeschakeld**.",
+          "l110_embedReply_description": "Stel eerst een welkomstkanaal in: `${prefix}welcome channel <#kanaal>`",
+          "l113_embedReply_description": "Welkomstberichten **ingeschakeld**.",
+          "l119_embedReply_description": "Welkomstberichten **uitgeschakeld**.",
+          "l124_embedReply_description": "Gebruik: `${prefix}welcome image on` of `${prefix}welcome image off`",
+          "l127_embedReply_description": "Welkomstkaartafbeelding **${val === 'on' ? 'enabled' : 'disabled'}**.",
+          "l132_embedReply_description": "Gebruik: `${prefix}welcome message <tekst>` of `${prefix}welcome message clear`\nVariabelen: `{user}` `{server}` `{count}` `{role}`",
+          "l139_embedReply_description": "Aangepaste welkomsttekst gewist.",
+          "l142_embedReply_description": "Welkomstbericht is te lang (max. 500 tekens).",
+          "l146_embedReply_description": "Welkomsttekst ingesteld op:\n>>> ${val}",
+          "l159_embedReply_description": "Beschikbare presets: ${availablePresets}\nGebruik: `!welcome card preset <naam>` of `!welcome card preset clear`",
+          "l164_embedReply_description": "Kaartvoorinstelling gewist. Standaardthema wordt gebruikt.",
+          "l168_embedReply_description": "Ongeldige preset. Kies uit: ${availablePresets}",
+          "l172_embedReply_description": "Kaartpreset ingesteld op **${name}**. Gebruik `!welcome test` om een voorbeeld te bekijken.",
+          "l177_embedReply_description": "Geef een geldige hexkleur op. Voorbeeld: `${prefix}welcome card color #ff6b00`",
+          "l180_embedReply_description": "Kaartaccentkleur ingesteld op **${hex}**.",
+          "l185_embedReply_description": "Geef 1-3 hexkleuren op voor de gradient.\nVoorbeeld: `${prefix}welcome card bgcolor #1a1a2e #16213e #0f3460`",
+          "l190_embedReply_description": "Kaartachtergrondverloop ingesteld op **${colors}**.",
+          "l195_embedReply_description": "`Voer een geldige hexkleur in. Voorbeeld: \\`${prefix}welcome card textcolor #f5f5f5\\``",
+          "l198_embedReply_description": "Kaarttekstkleur ingesteld op **${hex}**.",
+          "l203_embedReply_description": "Gebruik: `${prefix}welcome card greeting <tekst>` of `${prefix}welcome card greeting clear`",
+          "l207_embedReply_description": "Begroetingstekst gereset naar \"WELCOME\".",
+          "l209_embedReply_description": "Begroetingstekst is te lang (max. 30 tekens).",
+          "l212_embedReply_description": "Kaartbegroetingstekst ingesteld op **${text}**.",
+          "l217_embedReply_description": "Gebruik: `${prefix}welcome card subtitle <tekst>` of `${prefix}welcome card subtitle clear`",
+          "l221_embedReply_description": "Subtitel is teruggezet naar de standaardwaarde.",
+          "l223_embedReply_description": "Ondertiteltekst is te lang (max 50 tekens).",
+          "l226_embedReply_description": "Kaartondertitel ingesteld op **${text}**.",
+          "l231_embedReply_description": "Gebruik: `${prefix}welcome card membercount on` of `${prefix}welcome card membercount off`",
+          "l234_embedReply_description": "Ledenaantal op kaart **${val === 'on' ? 'ingeschakeld' : 'uitgeschakeld'}**.",
+          "l239_embedReply_description": "Geef een geldige hexkleur op. Voorbeeld: `${prefix}welcome card countcolor #9999bb`",
+          "l242_embedReply_description": "Kleur van kaart-ledenaantal ingesteld op **${hex}**.",
+          "l247_embedReply_description": "Geef een geldige hex-kleur op. Voorbeeld: `${prefix}welcome card subtextcolor #aabbcc`",
+          "l250_embedReply_description": "Kaartondertitelkleur ingesteld op **${hex}**.",
+          "l255_embedReply_description": "Gebruik: `${prefix}welcome card background <url>` of `${prefix}welcome card background clear`",
+          "l260_embedReply_description": "Aangepaste achtergrondafbeelding verwijderd.",
+          "l262_embedReply_description": "Geef een geldige afbeeldings-URL op (moet beginnen met `http://` of `https://`).",
+          "l266_embedReply_description": "Afbeelding downloaden mislukt: ${err.message}",
+          "l270_embedReply_description": "Aangepaste achtergrondafbeelding ingesteld. Gebruik `${prefix}welcome test` om een voorbeeld te bekijken.",
+          "l277_embedReply_description": "Alle kaartaanpassingen zijn teruggezet naar de standaardinstellingen.",
+          "l292_embedReply_title": "Kaart aanpassen",
+          "l304_embedReply_description": "DM-welkomstberichten **${sub === 'on' ? 'enabled' : 'disabled'}**.",
+          "l309_embedReply_description": "Gebruik: `${prefix}welcome dm message <tekst>` of `${prefix}welcome dm message clear`\nVariabelen: `{user}` `{server}` `{count}` `{role}`",
+          "l313_embedReply_description": "Aangepaste welkomsttekst via DM gewist.",
+          "l315_embedReply_description": "DM-bericht is te lang (max. 500 tekens).",
+          "l318_embedReply_description": "DM-welkomsttekst ingesteld op:\n>>> ${val}",
+          "l323_embedReply_description": "Gebruik: `${prefix}welcome dm image on` of `${prefix}welcome dm image off`",
+          "l326_embedReply_description": "DM-welkomstkaartafbeelding **${val === 'on' ? 'ingeschakeld' : 'uitgeschakeld'}**.",
+          "l333_embedReply_title": "DM-welkom",
+          "l346_embedReply_description": "Welkomst-embed **${sub === 'on' ? 'enabled' : 'disabled'}**.",
+          "l351_embedReply_description": "Gebruik: `${prefix}welcome embed title <tekst>` of `${prefix}welcome embed title clear`",
+          "l355_embedReply_description": "Embedtitel gewist.",
+          "l357_embedReply_description": "Titel is te lang (max. 256 tekens).",
+          "l360_embedReply_description": "Embed-titel ingesteld op: **${val}**",
+          "l365_embedReply_description": "Gebruik: `${prefix}welcome embed description <tekst>` of `${prefix}welcome embed description clear`",
+          "l369_embedReply_description": "Embedbeschrijving gewist.",
+          "l371_embedReply_description": "Beschrijving is te lang (max. 2048 tekens).",
+          "l374_embedReply_description": "Embed-omschrijving ingesteld.",
+          "l379_embedReply_description": "Geef een geldige hexkleur op. Voorbeeld: `${prefix}welcome embed color #5865F2`",
+          "l382_embedReply_description": "Embedkleur ingesteld op **${hex}**.",
+          "l387_embedReply_description": "Gebruik: `${prefix}welcome embed footer <tekst>` of `${prefix}welcome embed footer clear`",
+          "l391_embedReply_description": "Embed-footer gewist.",
+          "l393_embedReply_description": "Footer is te lang (max 256 tekens).",
+          "l396_embedReply_description": "Embed-footer ingesteld op: ${val}",
+          "l401_embedReply_description": "Gebruik: `${prefix}welcome embed thumbnail on` of `${prefix}welcome embed thumbnail off`",
+          "l404_embedReply_description": "Embed-thumbnail **${val === 'on' ? 'ingeschakeld' : 'uitgeschakeld'}**.",
+          "l410_embedReply_description": "Alle embed-instellingen gewist.",
+          "l421_embedReply_title": "Embed aanpassen",
+          "l428_embedReply_description": "Gebruik: `${prefix}welcome role on` of `${prefix}welcome role off`\nIndien ingeschakeld, wordt de naam van de auto-rol getoond op de kaart en in de `{role}` variabele.",
+          "l432_embedReply_description": "Weergave van rol bij welkom **${val === 'on' ? 'enabled' : 'disabled'}**.",
+          "l446_embedReply_description": "Huidige welkomsttrigger: **${current}**\nGebruik: `${prefix}welcome trigger join` of `${prefix}welcome trigger role <@rol>`",
+          "l450_embedReply_description": "Gebruik: `${prefix}welcome trigger join` of `${prefix}welcome trigger role <@rol>`",
+          "l475_embedReply_description": "Geef een rol op: `${prefix}welcome trigger role <@rol>`\nOf stel eerst een autorol in met `${prefix}autorole set @Role`.",
+          "l484_embedReply_description": "Welkomsttrigger ingesteld op **roltoewijzing** (${roleId ? `<@&${roleId}>` : `autorole: **${roleName}**`}).",
+          "l489_embedReply_description": "Welkomstbericht-trigger ingesteld op **lid komt binnen**.",
+          "l529_embedReply_description": "Genereren van de welkomstkaartafbeelding is mislukt. Controleer de console voor meer details.",
+          "l604_embedReply_description": "DM-voorbeeld verzonden! Check je DM's.",
+          "l606_embedReply_description": "Kon je geen DM sturen. Zorg dat je DM's openstaan.",
+          "l627_embedReply_title": "Welkomstsysteem",
+          "l682_embedReply_description": "Er is een fout opgetreden bij het bijwerken van de welkomstinstellingen."
+        }
+      },
+      "general": {
+        "help": {
+          "l271_addFields_name": "Vereist",
+          "l277_addFields_value": "${cmd.cooldown}s"
+        },
+        "invite_me": {
+          "l24_setDescription": "Voeg ClaudeCityMod toe aan je server: [Uitnodigingslink](${INVITE_URL})"
+        },
+        "ping": {
+          "l31_addFields_value": "`${restLatency}ms`",
+          "l32_addFields_value": "${msgLatency}ms"
+        }
+      },
+      "info": {
+        "rolelist": {
+          "l35_reply": "Deze server heeft geen rollen.",
+          "l50_setTitle": "Rollen — ${guild.name}",
+          "l68_reply": "Er is een fout opgetreden bij het ophalen van rollen."
+        }
+      },
+      "owner": {
+        "shardinfo": {
+          "l66_setTitle": "Shard-info",
+          "l76_reply": "Er is een fout opgetreden tijdens het uitvoeren van !shardinfo."
+        }
+      }
+    },
+    "events": {
+      "guildMemberAdd": {
+        "l31_setFooter": "Als je denkt dat dit een vergissing is, neem dan contact op met de bot-eigenaar",
+        "l24_setTitle": "Je bent automatisch verbannen",
+        "l65_setTitle": "Globale ban toegepast"
+      },
+      "messageCreate": {
+        "l33_addFields_name": "Gebruikers-ID",
+        "l34_addFields_name": "Via",
+        "l34_addFields_value": "Rapportinbox-kanaal",
+        "l37_setFooterReport": "Dit rapport is alleen zichtbaar voor staff",
+        "l87_setFooter": "ClaudeCityMod v${version}",
+        "l79_setTitle": "👋 Hoi!",
+        "l103_reply": "Mijn prefix hier is **`${prefix}`** - gebruik `${prefix}help` om alle commando's te zien.\n📖 Docs: {docsUrl}"
+      },
+      "messageReactionAdd": {
+        "l112_addFields_name": "Beslissing",
+        "l112_addFields_valueApplied": "{emoji} Toegepast",
+        "l112_addFields_valueSkipped": "{emoji} Overgeslagen",
+        "l104_setTitle": "Globale Ban - Beslissing geregistreerd",
+        "l106_setDescriptionApplied": "**{decidedByName}** heeft ervoor gekozen deze ban toe te passen. De gebruiker is verbannen.",
+        "l107_setDescriptionSkipped": "**{decidedByName}** koos ervoor deze ban over te slaan. De gebruiker wordt hier niet gebanned.",
+        "l401_addFields_name": "Bron",
+        "l405_setFooter": "ID: ${reaction.messageId}"
+      },
+      "messageReactionRemove": {
+        "l113_addFields_name": "Bron",
+        "l116_setFooter": "ID: ${reaction.messageId}"
+      }
+    },
+    "handlers": {
+      "CommandHandler": {
+        "l220_reply": "Wacht nog ${customCooldown.remaining} seconde(n) voordat je !${customCmd.name} opnieuw gebruikt.",
+        "l239_reply": "Deze aangepaste actie kan alleen op een server worden gebruikt.",
+        "l248_reply": "Aangepast commando !${customCmd.name} mist zijn doelrol.",
+        "l257_reply": "Je hebt de machtiging Rollen beheren nodig om dit aangepaste actiecommando te gebruiken.",
+        "l263_reply": "Gebruik: ${usedPrefix}${customCmd.name} @user",
+        "l273_reply": "Kon die gebruiker niet vinden op deze server.",
+        "l283_reply": "De ingestelde rol voor !${customCmd.name} bestaat niet meer.",
+        "l297_reply": "Ik heb de rechten \"Rollen beheren\" nodig om dit aangepaste actiecommando uit te voeren.",
+        "l313_reply": "Ik kon die rol niet bijwerken (waarschijnlijk vanwege de rolhiërarchie).",
+        "l412_reply": "Je hebt de volgende rechten nodig: ${requiredPermissions}",
+        "l426_reply": "Wacht ${cooldownInfo.remaining} seconde(n) voordat je dit commando opnieuw gebruikt.",
+        "dmFailed": "Ik kon je geen DM sturen - controleer je privacy-instellingen."
+      }
+    },
+    "services": {
+      "RssPollerService": {
+        "l750_addFields_name": "Link"
+      }
+    },
+    "utils": {
+      "permError": {
+        "kick": "Ik heb geen toestemming om deze gebruiker te kicken. Diegene heeft mogelijk een hogere rol dan ik, of ik mis de **Kick Members**-permissie op deze server. Vraag een admin om de rol en permissies van de bot te controleren.",
+        "ban": "Ik heb geen toestemming om deze gebruiker te bannen. Diegene heeft mogelijk een hogere rol dan ik, of ik heb geen **Ban Members**-permissie in deze server. Vraag een admin om de rol en permissies van de bot te controleren.",
+        "unban": "Ik heb geen toestemming om gebruikers te unbannen op deze server. Vraag een beheerder om de bot de rechten **Leden verbannen** te geven.",
+        "timeout": "Ik heb geen toestemming om deze gebruiker een timeout te geven. Diegene heeft mogelijk een hogere rol dan ik, of ik mis de **Leden modereren**-permissie. Vraag een beheerder om de rol en permissies van de bot te controleren.",
+        "mute": "Ik heb geen toestemming om deze gebruiker te muten. Ze hebben mogelijk een hogere rol dan ik, of ik mis de **Leden modereren**-permissie. Vraag een admin om de rol en permissies van de bot te controleren.",
+        "unmute": "Ik heb geen toestemming om deze gebruiker te unmuten. Diegene heeft mogelijk een hogere rol dan ik, of ik mis de **Moderate Members**-permissie. Vraag een beheerder om de rol en permissies van de bot te controleren.",
+        "clear": "Ik heb geen toestemming om berichten te verwijderen in dit kanaal. Vraag een beheerder om de bot **Berichten beheren** en **Berichtgeschiedenis lezen** te geven in dit kanaal."
+      },
+      "raidDetector": {
+        "l91_addFields_name": "Server",
+        "l93_addFields_value": "```\n${userIds}\n```",
+        "userIds": "Gebruikers-ID's (${userIds.length})",
+        "userIdsCopyable": "Gebruikers-ID's (kopieerbaar)",
+        "embedTitle": "🚨 Mogelijke Raid gedetecteerd"
+      },
+      "suspiciousDetector": {
+        "l159_addFields_name": "Snelle Globalban",
+        "l160_addFields_value": "```\n!globalban add ${idList} Raid bot account\n```",
+        "l153_setTitle": "Verdachte ${suspects.length > 1 ? 'toetredingen' : 'toetreding'} - ${guild.name}",
+        "l184_setFooter": "Beoordeel deze gebruikers en overweeg een ban bij verdachte activiteit",
+        "l177_setTitle": "Verdachte lidmaatschap-melding - ${guild.name}"
+      }
+    }
+  }
+}

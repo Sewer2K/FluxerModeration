@@ -1,0 +1,223 @@
+{
+  "verification": {
+    "panel": {
+      "title": "Vérification Serveur",
+      "description": "**Bienvenue !** Ce serveur requiert une vérification manuelle pour aider à lutter contre les bots.\n\nRéagissez avec ✅ci-dessous pour commencer le processus de vérification.\n\nVous allez être placé dans un canal privé avec une image de captcha; tapez simplement les 6 lettres affichées pour vous vérifier.",
+      "footer": "C'est facile et rapide de se faire vérifier !"
+    },
+    "setupComplete": {
+      "title": "✅ Configuration de la vérification terminée",
+      "description": "**Catégorie:** Vérification\n**Canal de Panneau :** <#{panelChannelId}>\n**Rôle vérifié:** <@&{verifiedRoleId}>\n\nLes utilisateurs peuvent maintenant réagir avec ✅ dans <#{panelChannelId}> pour commencer la vérification.\n\n> **Important :** Assurez-vous de retirer à `@everyone` la permission `Voir le canal` sur vos autres canaux et de permettre au rôle **Vérifié** de les voir. Cela garantit que les utilisateurs non vérifiés ne peuvent voir que le canal de vérification."
+    },
+    "captcha": {
+      "title": "🔒 Vérification requise",
+      "description": "Bienvenue, <@{userId}> !\n\nVeuillez taper les **6 lettres** affichées dans l'image ci-dessus pour vous vérifier.\n\nVous avez **{maxAttempts}** tentative(s). Le code n'est **pas** sensible à la casse.\nCe canal expirera dans **60 secondes**."
+    },
+    "testChannelCreated": "Canal de test de vérification créé : <#{channelId}>",
+    "errors": {
+      "missingPanelChannel": "Veuillez d'abord spécifier un salon ou exécutez `{prefix}vérifier l'installation`.",
+      "usageRole": "Utilisation: `{prefix}verify role <@role>`",
+      "usageCategory": "Utilisation: `{prefix}verify category <categoryId>`",
+      "usageLog": "Utilisation: `{prefix}verify log <#channel>` or `{prefix}verify log clear`",
+      "usageTestFirst": "Exécutez d'abord `{prefix}verify setup` pour créer la catégorie de vérification.",
+      "createTestVerificationChannelFailed": "Échec de la création du canal de vérification de test : {error}",
+      "createVerifiedRoleFailed": "Échec de la création du rôle vérifié : {error}",
+      "createCategoryFailed": "Échec de la création de la catégorie de vérification : {error}",
+      "createPanelChannelFailed": "Échec de la création du canal verify-here : {error}",
+      "postPanelFailed": "Échec de la publication du panneau de vérification : {error}",
+      "postPanelGenericFailed": "Échec de la publication du panneau : {error}",
+      "generateCaptchaFailed": "Échec de la génération du captcha : {error}",
+      "updateFailed": "Une erreur est survenue lors de la mise à jour des paramètres de vérification.",
+      "invalidCategory": "Veuillez indiquer un ID de catégorie valide."
+    },
+    "status": {
+      "title": "Configuration de la vérification",
+      "enabledYes": "Oui",
+      "enabledNo": "Non",
+      "notSet": "Non défini",
+      "maxAttemptsLabel": "Tentatives maximum"
+    },
+    "resetDone": "Les paramètres de vérification ont été réinitialisés. Les canaux et les rôles créés lors de l'installation n'ont **pas** été supprimés — supprimez-les manuellement si nécessaire.",
+    "result": {
+      "passedTitle": "✅ Vérification terminée !",
+      "passedDescription": "Vous avez été vérifié. Ce canal sera supprimé sous peu.",
+      "failedTitle": "❌ Échec de la vérification",
+      "failedDescription": "Vous avez utilisé toutes vos tentatives. Ce canal va être supprimé. Veuillez réessayer en réagissant au panneau de vérification.",
+      "incorrectDescription": "Ce n'était pas correct. Il vous reste **{remaining}** tentative(s)."
+    },
+    "log": {
+      "startedTitle": "Vérification commencée",
+      "startedDescription": "<@{userId}> a commencé une tentative de vérification.",
+      "passedTitle": "✅ Vérification réussie",
+      "passedDescription": "<@{userId}> a réussi la vérification.",
+      "failedTitle": "❌ Échec de la vérification",
+      "failedDescription": "<@{userId}> a échoué la vérification (toutes les tentatives ont été utilisées).",
+      "cleared": "Canal de logs de vérification effacé."
+    },
+    "panelPosted": "Panneau de vérification posté dans <#{channelId}>.",
+    "roleSetDone": "Rôle vérifié défini à <@&{roleId}>.",
+    "categorySetDone": "Catégorie de vérification définie sur `{categoryId}`.",
+    "help": {
+      "title": "Système de vérification manuelle",
+      "body": "`{prefix}vérifier setup` - création automatique de la catégorie, du canal, du rôle, et du panneau\n`{prefix}vérifier le panneau [#channel]` - (re-)poste le panneau de vérification\n`{prefix}vérifier le rôle <@role>` - définit le rôle vérifié\n`{prefix}vérifier la catégorie <id>` - définit la catégorie\n`{prefix}vérifier le journal <#channel>` - définit un canal de log\n`{prefix}vérifier le statut` - affiche la configuration actuelle\n`{prefix}vérifier la réinitialisation` - désactive et efface les paramètres\n`{prefix}vérifier le test` - ouvre un canal de vérification test privé"
+    }
+  },
+  "commands": {
+    "generic": {
+      "invalidRoleInput": "Veuillez mentionner un rôle valide ou fournir un ID de rôle.",
+      "invalidChannelInput": "Veuillez mentionner un canal valide ou fournir un ID de canal.",
+      "invalidUserInput": "Veuillez fournir un utilisateur valide ou un ID.",
+      "levelingDisabled": "Le système de niveaux n'est pas activé sur ce serveur. Admins : `{prefix}leveling enable` ou le tableau de bord.",
+      "membersFetchFailed": "Échec de la récupération des membres du serveur.",
+      "noReasonProvided": "Aucune raison fournie",
+      "roleNotFound": "Ce rôle n’existe pas dans ce serveur.",
+      "serverOnly": "Cette commande ne peut être utilisée que dans un serveur."
+    },
+    "ping": {
+      "gateway": "Passerelle"
+    },
+    "rank": {
+      "noXp": "Aucun XP enregistré pour cet utilisateur pour le moment.",
+      "title": "Rang",
+      "level": "Niveau",
+      "rank": "Rang",
+      "progress": "Progression",
+      "totalXp": "XP total",
+      "levelUp": "{user} est passé au **niveau {level}** !"
+    },
+    "leaderboard": {
+      "empty": "Aucun XP enregistré sur ce serveur pour le moment.",
+      "title": "Classement XP",
+      "entry": "niveau {level} ({xp} XP)"
+    },
+    "uptime": {
+      "labelUptime": "Durée de fonctionnement",
+      "labelStarted": "Démarré",
+      "unitDaySingular": "jour",
+      "unitDayPlural": "jours",
+      "unitHourSingular": "heure",
+      "unitHourPlural": "heures",
+      "unitSecondSingular": "seconde",
+      "unitSecondPlural": "secondes"
+    },
+    "inrole": {
+      "usage": "Utilisation: `{prefix}inrole <@role> [page]`",
+      "noneWithRole": "Aucun membre n'a actuellement le rôle **{roleName}**.",
+      "invalidPage": "La page doit être un nombre à partir de 1.",
+      "pageTooHigh": "Seulement {totalPages} page(s) disponible(s) pour ce rôle.",
+      "embedTitle": "Membres ayant {roleName}",
+      "footerTotal": "{memberCount} membre(s) total",
+      "footerPageHint": "page {page}/{totalPages} - exécutez {prefix}inrole <role> <page> pour voir les autres pages"
+    },
+    "roleinfo": {
+      "defaultColor": "Par défaut (sans couleur)",
+      "title": "Rôle : {roleName}",
+      "fieldColor": "Couleur ",
+      "fieldPosition": "Emplacement",
+      "fieldMentionable": "Mentionnable",
+      "fieldCreated": "Créé",
+      "unknown": "Inconnu",
+      "yes": "Oui",
+      "no": "Non",
+      "genericError": "Une erreur s'est produite lors de la récupération des informations de rôle."
+    },
+    "serverinfo": {
+      "title": "Informations du serveur",
+      "fieldName": "Nom",
+      "fieldOwner": "Propriétaire",
+      "fieldMembers": "Membres",
+      "fieldTextChannels": "Canaux textuels",
+      "fieldVoiceChannels": "Canaux vocaux",
+      "fieldCategories": "Catégories",
+      "fieldRoles": "Rôles",
+      "fieldCreated": "Créé",
+      "fieldFeatures": "Fonctionnalités ",
+      "none": "Aucun",
+      "genericError": "Une erreur s'est produite lors de la récupération des informations du serveur."
+    },
+    "userinfo": {
+      "userNotFound": "Cet utilisateur est introuvable.",
+      "title": "Informations sur l'utilisateur",
+      "fieldUsername": "Nom d'utilisateur",
+      "fieldAccountCreated": "Compte créé",
+      "fieldJoinedServer": "Serveur rejoint",
+      "fieldRoles": "Rôles ({totalRoles})",
+      "fieldNickname": "Pseudo",
+      "yes": "Oui",
+      "no": "Non",
+      "unknown": "Inconnu",
+      "timeoutUntil": "Jusqu'à {timeoutEnd}",
+      "genericError": "Une erreur s'est produite lors de la récupération des informations de l'utilisateur."
+    },
+    "moderation": {
+      "appeal": {
+        "usage": "Usage: `{prefix}appeal list [userId]`, `{prefix}appeal view <userId>`, `{prefix}appeal approve|deny|dismiss|blacklist <userId> [note]`, `{prefix}appeal link <userId>`, or `{prefix}appeal config ...`",
+        "userUsage": "Usage: `{prefix}appeal view|approve|deny|dismiss|blacklist|link <userId>`",
+        "nonePending": "There are no pending ban appeals.",
+        "pendingTitle": "Pending ban appeals",
+        "notFound": "No appeal record was found for that user.",
+        "viewTitle": "Ban appeal for {userId}",
+        "linkUnavailable": "No appeal link is available for that user.",
+        "linkSent": "The appeal link was sent to your Fluxer DMs.",
+        "linkDmFailed": "I could not DM the appeal link. Check your DMs and try again.",
+        "notPending": "That appeal is not pending. Current state: {state}.",
+        "approveFailed": "Fluxer rejected the unban. The appeal was not approved.",
+        "approved": "Approved the appeal and unbanned {userId}.",
+        "decisionSaved": "Appeal state saved as **{state}**.",
+        "configStatus": "Appeals: **{enabled}**\nReview channel: **{channelId}**\nCooldown: **{cooldownDays} day(s)**\nTemp bans: **{tempBans}**\nDefault no-appeal: **{defaultNoAppeal}**\nUse `{prefix}appeal config enabled|tempbans|defaultnoappeal on|off`, `channel <channelId|none>`, or `cooldown <days>`. ",
+        "configUsage": "Usage: `{prefix}appeal config enabled|tempbans|defaultnoappeal on|off`, `channel <channelId|none>`, or `cooldown <0-365>`. ",
+        "configToggleUsage": "Use `on` or `off`.",
+        "configInvalidChannel": "Provide a valid Fluxer channel ID or `none`.",
+        "configInvalidCooldown": "Cooldown must be a whole number from 0 to 365 days.",
+        "configSaved": "Appeal settings saved."
+      },
+      "warn": {
+        "missingReason": "Veuillez fournir une raison pour l'avertissement.",
+        "success": "Avertissement réussi **{username}** (<@{userId}>).\n**Raison:** {reason}\n**Avertissements totaux :** {warningCount}",
+        "autoMuteApplied": "⚠️ Mute automatique appliqué à <@{targetUserId}> pour avoir atteint **{warningCount}** avertissements (seuil: **{threshold}**).",
+        "autoMuteReason": "Seuil de mute automatique atteint ({warningCount}/{threshold})",
+        "dmTitle": "Avertissement dans {guildName}",
+        "dmDescription": "Vous avez reçu un avertissement dans **{guildName}**.",
+        "dmFieldReason": "Raison",
+        "dmFieldTotalWarnings": "Avertissements Totaux",
+        "errors": {
+          "generic": "Une erreur est survenue lors de l'avertissement de cet utilisateur."
+        }
+      },
+      "clear": {
+        "usage": "Utilisation: `{prefix}clear <amount>` (1-100)",
+        "invalidNumber": "Veuillez fournir un nombre valide.",
+        "amountRange": "Le montant doit être compris entre 1 et 100.",
+        "noMessages": "Aucun message à supprimer.",
+        "successDeleted": "Suppression réussie de **{userCount}** message(s).",
+        "errors": {
+          "cannotDeleteOlderThan14Days": "Impossible de supprimer les messages datant de plus de 14 jours.",
+          "generic": "Une erreur est survenue lors de la suppression des messages."
+        }
+      },
+      "modlogs": {
+        "invalidCase": "Utilisation : `{prefix}modlogs case <numéro>`",
+        "caseNotFound": "Cas #{caseNumber} introuvable.",
+        "caseTitle": "Cas #{caseNumber}",
+        "fieldTarget": "Cible",
+        "fieldModerator": "Modérateur",
+        "fieldReason": "Raison",
+        "fieldDuration": "Durée",
+        "invalidAction": "Type d'action invalide. Valides : {actions}",
+        "byLabel": "par",
+        "title": "Cas de modération",
+        "noResults": "Aucun cas ne correspond à vos filtres.",
+        "errors": {
+          "generic": "Impossible de récupérer les logs de modération. Veuillez réessayer."
+        }
+      }
+    },
+    "admin": {
+      "customcommand": {
+        "actionUsage": "Utilisation : `!cc action <nom> <type> [roleId]`. Types valides : {actions}",
+        "actionRoleRequired": "Les actions de rôle nécessitent un rôle : `!cc action <nom> <type> <@rôle ou ID de rôle>`",
+        "actionSet": "Action de la commande personnalisée `{name}` définie sur `{actionType}`."
+      }
+    }
+  }
+}

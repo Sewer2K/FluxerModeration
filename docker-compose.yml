@@ -1,0 +1,42 @@
+services:
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    # Persistent database on the host.
+    volumes:
+      - ./data/mongo:/data/db
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  claudecitymod:
+    build:
+      context: .
+      args:
+        VITE_FLUXER_INSTANCE_API: ${VITE_FLUXER_INSTANCE_API:-https://api.fluxer.app}
+        VITE_FLUXER_INSTANCE_WEB: ${VITE_FLUXER_INSTANCE_WEB:-https://web.fluxer.app}
+        VITE_FLUXER_INSTANCE_MEDIA: ${VITE_FLUXER_INSTANCE_MEDIA:-https://fluxerusercontent.com}
+        VITE_FLUXER_CLIENT_ID: ${FLUXER_OAUTH_CLIENT_ID:-}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      CCM_PROCESS: all
+      API_ENABLED: 'true'
+      MONGO_URI: mongodb://mongo:27017/claudecitymod
+      WAIT_FOR_MONGO: 'true'
+      MONGO_HOST: mongo
+      BOT_INTERNAL_BIND: 0.0.0.0
+      BOT_INTERNAL_URL: http://127.0.0.1:4001
+      GATEWAY_SESSION_PATH: /data/.gateway-session.json
+      UPLOADS_DIR: /data/uploads
+    volumes:
+      # Persistent bot state (gateway session, uploads, etc.).
+      - ./data/bot:/data
+    ports:
+      - '${API_PORT:-4000}:4000'
+    depends_on:
+      mongo:
+        condition: service_healthy
