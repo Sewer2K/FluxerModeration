@@ -10,7 +10,6 @@ export const RESERVED_LEADERBOARD_VANITIES = new Set([
   'lb',
   'login',
   'logout',
-  'mock',
   'my-data',
   'privacy',
   'public',

@@ -40,28 +40,10 @@ export interface PublicLeaderboardResponse {
   entries: PublicLeaderboardEntry[];
 }
 
-export const MOCK_PUBLIC_LEADERBOARD: PublicLeaderboardResponse = {
-  guild: { id: 'mock', name: 'ClaudeCityMod Mock Server', icon: null },
-  slug: 'mock',
-  period: 'all',
-  entries: [
-    { rank: 1, userId: '300000000000000001', username: 'Nova', avatar: null, level: 12, xp: 4200, messages: 842 },
-    { rank: 2, userId: '300000000000000002', username: 'Kira', avatar: null, level: 9, xp: 2800, messages: 510 },
-    { rank: 3, userId: '300000000000000003', username: 'Rex', avatar: null, level: 7, xp: 1900, messages: 388 },
-    { rank: 4, userId: '300000000000000004', username: 'Milo', avatar: null, level: 5, xp: 950, messages: 201 },
-    { rank: 5, userId: '300000000000000005', username: 'Jade', avatar: null, level: 4, xp: 620, messages: 144 },
-  ],
-};
-
 export async function fetchPublicLeaderboard(
   slug: string,
   period: 'all' | 'weekly' | 'monthly' = 'all',
 ): Promise<PublicLeaderboardResponse> {
-  const mockMode = import.meta.env.VITE_MOCK_MODE === 'true';
-  if (mockMode && (slug === 'mock' || slug.startsWith('mock'))) {
-    return { ...MOCK_PUBLIC_LEADERBOARD, slug, period };
-  }
-
   const params = new URLSearchParams({ period, limit: '25' });
   const res = await fetch(`/api/public/lb/${encodeURIComponent(slug)}?${params.toString()}`);
   if (!res.ok) {

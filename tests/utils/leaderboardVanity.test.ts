@@ -24,7 +24,7 @@ describe('leaderboardVanity', () => {
     expect(normalizeLeaderboardVanity('lb')).toBeNull();
     expect(normalizeLeaderboardVanity('admin')).toBeNull();
     expect(normalizeLeaderboardVanity('123456789012345678')).toBeNull();
-    expect(RESERVED_LEADERBOARD_VANITIES.has('mock')).toBe(true);
+    expect(RESERVED_LEADERBOARD_VANITIES.has('privacy')).toBe(true);
   });
 
   it('validates format helper', () => {

@@ -9,13 +9,6 @@ import { Label } from '../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Textarea } from '../components/ui/textarea';
 
-const MOCK_MODE = import.meta.env.VITE_MOCK_MODE === 'true';
-
-const MOCK_GUILDS: GuildSummary[] = [
-  { id: '300000000000000101', name: 'ClaudeCityMod Test Server', icon: null, botPresent: true },
-  { id: '300000000000000102', name: 'Community Sandbox', icon: null, botPresent: true },
-];
-
 function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : 'Something went wrong';
 }
@@ -34,10 +27,8 @@ export function ReportBug() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    const load = MOCK_MODE
-      ? Promise.resolve(MOCK_GUILDS)
-      : api.get<GuildSummary[]>('/reports/context', { skipCache: true });
-    load
+    api
+      .get<GuildSummary[]>('/reports/context', { skipCache: true })
       .then((nextGuilds) => {
         if (cancelled) return;
         setGuilds(nextGuilds);
@@ -61,25 +52,7 @@ export function ReportBug() {
     setSuccess(null);
 
     try {
-      const report = MOCK_MODE
-        ? ({
-            _id: 'mock-report-000000000000',
-            reporterId: user?.id ?? '300000000000000001',
-            reporterUsername: user?.username ?? 'MockAdmin',
-            reporterAvatar: user?.avatar ?? null,
-            guildId,
-            guildName: guilds.find((guild) => guild.id === guildId)?.name ?? 'ClaudeCityMod Test Server',
-            description,
-            links: links
-              .split(/\r?\n/)
-              .map((link) => link.trim())
-              .filter(Boolean),
-            status: 'open',
-            replies: [],
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          } as BugReport)
-        : await api.post<BugReport>('/reports', { guildId, description, links });
+      const report = await api.post<BugReport>('/reports', { guildId, description, links });
       setSuccess(report);
       setDescription('');
       setLinks('');

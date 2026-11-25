@@ -42,7 +42,6 @@ export function fluxerClientId(): string {
 }
 
 export async function loadInstanceEndpoints(): Promise<void> {
-  if (import.meta.env.VITE_MOCK_MODE === 'true') return;
   try {
     const res = await fetch('/api/public/instance');
     if (!res.ok) return;

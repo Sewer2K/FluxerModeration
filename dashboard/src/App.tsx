@@ -19,7 +19,6 @@ const MyData = lazy(() => import('./pages/MyData').then((m) => ({ default: m.MyD
 const PublicLeaderboard = lazy(() =>
   import('./pages/PublicLeaderboard').then((m) => ({ default: m.PublicLeaderboard })),
 );
-const MOCK_MODE = import.meta.env.VITE_MOCK_MODE === 'true';
 
 function PageSpinner() {
   return (
@@ -49,7 +48,6 @@ function ProtectedRoute({ children, ownerOnly = false }: { children: React.React
 function HomeRedirect() {
   const { user, loading } = useAuth();
   if (loading) return null;
-  if (MOCK_MODE) return <Navigate to="/guilds/mock" replace />;
   if (user?.isOwner)
     return (
       <ErrorBoundary>

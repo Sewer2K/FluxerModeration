@@ -19,8 +19,6 @@ import {
 } from '../lib/embedMaker';
 import { fluxerApiBaseUrl } from '../lib/fluxerUrls';
 
-const MOCK_MODE = import.meta.env.VITE_MOCK_MODE === 'true';
-
 function ChannelSelect({
   channels,
   value,
@@ -121,11 +119,6 @@ export default function EmbedMaker({ guild, guildId }: EmbedMakerProps) {
     setNotice(null);
     setSending(true);
     try {
-      if (MOCK_MODE) {
-        setNotice({ type: 'success', message: 'Embed sent (mock mode)' });
-        return;
-      }
-
       const body: Record<string, unknown> = {
         sendAs,
         embed: payload,

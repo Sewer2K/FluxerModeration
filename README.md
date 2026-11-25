@@ -14,6 +14,17 @@ dashboard, and stores everything in MongoDB on your own host.
   logging, leveling, starboard, sticky messages, custom commands, RSS feeds
 - **Dashboard** - web UI for all settings, analytics, health, and reports
 
+## Dashboard preview
+
+Manage verification, moderation, tickets, and server settings from one private
+web dashboard.
+
+| General settings | Auto-moderation |
+| --- | --- |
+| ![ClaudeCityMod general dashboard settings](docs/screenshots/dashboard-general.png) | ![ClaudeCityMod auto-moderation settings](docs/screenshots/dashboard-automod.png) |
+| **Verification** | **Tickets** |
+| ![ClaudeCityMod verification settings](docs/screenshots/dashboard-verification.png) | ![ClaudeCityMod ticket settings](docs/screenshots/dashboard-tickets.png) |
+
 ---
 
 ## 1. Create the Fluxer application

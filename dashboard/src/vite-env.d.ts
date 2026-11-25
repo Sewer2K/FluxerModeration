@@ -5,7 +5,6 @@ interface ImportMetaEnv {
   readonly VITE_GLITCHTIP_ENVIRONMENT: string;
   readonly VITE_POSTHOG_KEY?: string;
   readonly VITE_POSTHOG_HOST?: string;
-  readonly VITE_MOCK_MODE?: string;
   readonly VITE_FLUXER_INSTANCE_API?: string;
   readonly VITE_FLUXER_INSTANCE_WEB?: string;
   readonly VITE_FLUXER_INSTANCE_MEDIA?: string;

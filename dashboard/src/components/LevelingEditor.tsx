@@ -28,8 +28,6 @@ import { buildLevelingSavePayload, MESSAGE_XP_QUALITY_PRESETS, normalizeLeveling
 import { buildWelcomeChannelSelectData } from '../lib/welcomeChannelSelect';
 import { leaderboardPublicUrl } from '../lib/publicLeaderboard';
 
-const MOCK_MODE = import.meta.env.VITE_MOCK_MODE === 'true';
-
 interface Props {
   settings: GuildSettings;
   guild: GuildDetail;
@@ -167,14 +165,6 @@ export default function LevelingEditor({ settings, guild, guildId, onSave, savin
   }, [settings.leveling]);
 
   useEffect(() => {
-    if (MOCK_MODE) {
-      setLeaderboard([
-        { userId: '300000000000000001', level: 12, xp: 4200 },
-        { userId: '300000000000000002', level: 9, xp: 2800 },
-        { userId: '300000000000000003', level: 7, xp: 1900 },
-      ]);
-      return;
-    }
     api
       .get<any[]>(`/guilds/${guildId}/leveling/leaderboard?limit=10`, { skipCache: true })
       .then(setLeaderboard)
@@ -740,28 +730,11 @@ export default function LevelingEditor({ settings, guild, guildId, onSave, savin
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="rounded-xl overflow-hidden border border-[hsl(var(--border))] bg-black/20">
-            {MOCK_MODE ? (
-              <div
-                className="w-full h-[200px] flex flex-col justify-center px-8 gap-3"
-                style={{ backgroundColor: leveling.rankCard.backgroundColor, color: leveling.rankCard.fontColor }}
-              >
-                <p className="text-2xl font-bold underline">Preview User</p>
-                <p className="text-sm opacity-90">Level: 5 · XP: 250 / 475 · Rank: 3</p>
-                <div className="h-5 rounded-full bg-white/85 overflow-hidden">
-                  <div
-                    className="h-full rounded-full"
-                    style={{ width: '52%', backgroundColor: leveling.rankCard.progressColor }}
-                  />
-                </div>
-                <p className="text-xs text-gray-400">Mock preview — start the API for a live render.</p>
-              </div>
-            ) : (
-              <img
-                src={`/api/guilds/${guildId}/leveling/rank-card-preview?t=${previewKey}`}
-                alt="Rank card preview"
-                className="w-full max-h-[200px] object-cover"
-              />
-            )}
+            <img
+              src={`/api/guilds/${guildId}/leveling/rank-card-preview?t=${previewKey}`}
+              alt="Rank card preview"
+              className="w-full max-h-[200px] object-cover"
+            />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="space-y-1.5">

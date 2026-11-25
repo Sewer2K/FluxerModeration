@@ -3,8 +3,8 @@ coverage/
 build/
 dashboard/dist/
 .bootstrap/
-.shots/
-screenshots/
+/.shots/
+/screenshots/
 data/
 dashboard/tsconfig.tsbuildinfo
 .env

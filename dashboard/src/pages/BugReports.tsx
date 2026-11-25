@@ -7,80 +7,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Textarea } from '../components/ui/textarea';
 
-const MOCK_MODE = import.meta.env.VITE_MOCK_MODE === 'true';
-
 const STATUS_LABELS: Record<BugReportStatus, string> = {
   open: 'Open',
   in_progress: 'In progress',
   resolved: 'Resolved',
   closed: 'Closed',
 };
-
-const MOCK_REPORTS: BugReport[] = [
-  {
-    _id: '65f000000000000000000001',
-    reporterId: '300000000000000201',
-    reporterUsername: 'pixelpilot',
-    reporterAvatar: null,
-    guildId: '300000000000000101',
-    guildName: 'ClaudeCityMod Test Server',
-    description:
-      'The dashboard says ClaudeCityMod is offline after a restart, but the bot responds to commands in the server. The status changes back after I refresh twice.',
-    links: ['https://files.catbox.moe/status-example.png'],
-    status: 'open',
-    replies: [],
-    createdAt: new Date(Date.now() - 1000 * 60 * 28).toISOString(),
-    updatedAt: new Date(Date.now() - 1000 * 60 * 28).toISOString(),
-  },
-  {
-    _id: '65f000000000000000000002',
-    reporterId: '300000000000000202',
-    reporterUsername: 'moss',
-    reporterAvatar: null,
-    guildId: '300000000000000102',
-    guildName: 'Community Sandbox',
-    description: 'Top members on the leveling page show the wrong names for some users.',
-    links: ['https://litterbox.catbox.moe/resources/abc123.mp4'],
-    status: 'in_progress',
-    replies: [
-      {
-        replyId: 'mock-reply-1',
-        authorId: '300000000000000001',
-        message: 'I can reproduce this locally. I am checking the member lookup now.',
-        deliveryStatus: 'sent',
-        deliveryError: null,
-        createdAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-        deliveredAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-      },
-    ],
-    createdAt: new Date(Date.now() - 1000 * 60 * 55).toISOString(),
-    updatedAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-  },
-  {
-    _id: '65f000000000000000000003',
-    reporterId: '300000000000000203',
-    reporterUsername: 'river',
-    reporterAvatar: null,
-    guildId: '300000000000000101',
-    guildName: 'ClaudeCityMod Test Server',
-    description: 'The report form would not let me attach a video link from my phone.',
-    links: [],
-    status: 'resolved',
-    replies: [
-      {
-        replyId: 'mock-reply-2',
-        authorId: '300000000000000001',
-        message: 'This is fixed in the latest dashboard build. Thanks for reporting it.',
-        deliveryStatus: 'failed',
-        deliveryError: 'The bot process could not be reached',
-        createdAt: new Date(Date.now() - 1000 * 60 * 90).toISOString(),
-        deliveredAt: null,
-      },
-    ],
-    createdAt: new Date(Date.now() - 1000 * 60 * 110).toISOString(),
-    updatedAt: new Date(Date.now() - 1000 * 60 * 90).toISOString(),
-  },
-];
 
 function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : 'Something went wrong';
@@ -133,15 +65,6 @@ export function BugReports() {
 
   const loadReports = async () => {
     setError(null);
-    if (MOCK_MODE) {
-      const next = filter === 'all' ? MOCK_REPORTS : MOCK_REPORTS.filter((report) => report.status === filter);
-      setReports(next);
-      setSelectedId((current) =>
-        current && next.some((report) => report._id === current) ? current : (next[0]?._id ?? null),
-      );
-      setLoading(false);
-      return;
-    }
 
     try {
       const query = filter === 'all' ? '' : `?status=${filter}`;
@@ -177,9 +100,7 @@ export function BugReports() {
     setError(null);
     setNotice(null);
     try {
-      const next = MOCK_MODE
-        ? { ...selected, status, updatedAt: new Date().toISOString() }
-        : await api.patch<BugReport>(`/reports/${selected._id}`, { status });
+      const next = await api.patch<BugReport>(`/reports/${selected._id}`, { status });
       updateSelected(next);
       setNotice(`Marked report as ${STATUS_LABELS[status].toLowerCase()}.`);
     } catch (statusError: unknown) {
@@ -196,22 +117,10 @@ export function BugReports() {
     setError(null);
     setNotice(null);
     try {
-      const now = new Date().toISOString();
-      const nextReply: BugReportReply = {
-        replyId: `mock-reply-${Date.now()}`,
-        authorId: '300000000000000001',
-        message: reply.trim(),
-        deliveryStatus: 'sent',
-        deliveryError: null,
-        createdAt: now,
-        deliveredAt: now,
-      };
-      const result = MOCK_MODE
-        ? { report: { ...selected, replies: [...selected.replies, nextReply], updatedAt: now }, deliveryStatus: 'sent' }
-        : await api.post<{ report: BugReport; deliveryStatus: BugReportReply['deliveryStatus'] }>(
-            `/reports/${selected._id}/replies`,
-            { message: reply },
-          );
+      const result = await api.post<{ report: BugReport; deliveryStatus: BugReportReply['deliveryStatus'] }>(
+        `/reports/${selected._id}/replies`,
+        { message: reply },
+      );
       updateSelected(result.report);
       setReply('');
       setNotice(
@@ -230,18 +139,9 @@ export function BugReports() {
     setError(null);
     setNotice(null);
     try {
-      const now = new Date().toISOString();
-      const nextReply = { ...replyToRetry, deliveryStatus: 'sent' as const, deliveryError: null, deliveredAt: now };
-      const result = MOCK_MODE
-        ? {
-            report: {
-              ...selected,
-              replies: selected.replies.map((item) => (item.replyId === replyToRetry.replyId ? nextReply : item)),
-            },
-          }
-        : await api.post<{ report: BugReport; deliveryStatus: BugReportReply['deliveryStatus'] }>(
-            `/reports/${selected._id}/replies/${replyToRetry.replyId}/retry`,
-          );
+      const result = await api.post<{ report: BugReport; deliveryStatus: BugReportReply['deliveryStatus'] }>(
+        `/reports/${selected._id}/replies/${replyToRetry.replyId}/retry`,
+      );
       updateSelected(result.report);
       setNotice(
         result.report.replies.find((item) => item.replyId === replyToRetry.replyId)?.deliveryStatus === 'sent'

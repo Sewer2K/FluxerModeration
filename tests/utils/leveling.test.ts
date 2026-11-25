@@ -63,7 +63,7 @@ describe('leaderboard vanity', () => {
   });
 
   test('rejects reserved slugs', () => {
-    expect(normalizeLeaderboardVanity('mock')).toBeNull();
+    expect(normalizeLeaderboardVanity('admin')).toBeNull();
   });
 
   test('validate allows empty', () => {
